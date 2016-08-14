@@ -53,7 +53,7 @@ function getWineFlavor(wineColor) {
             $('.wine-weight').prepend("<p>Do you like your dry red wine to be complex and full-bodied or light, with a crisp finish?</p>");
             $('.wine-weight').show();
           }
-      }  else {            // wineColor must be 'white'
+      }  else {  // wineColor must be 'white'
 
         if (wineFlavor == 'sweet') {
             $('.wine-weight').prepend("<p>Do you like your sweet white wine to be a little buttery or more on the fruity side?</p>");

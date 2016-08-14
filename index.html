@@ -8,26 +8,29 @@
 </head>
 <body>
     <h1>Welcome to Windswept Winery</h1>
-    <div class = "customer-interview"
-        <!-- get input from user -->
-        <div class="wine-color">
-            <p>Do you prefer red wine or white?</p>
-            <input type="radio" name="wineColor" value="red"> red
-            <input type="radio" name="wineColor" value="white"> white
-        </div>
-
-        <div class="wine-flavor">
-            <input type="radio" name="wineFlavor" value="sweet"> sweet
-            <input type="radio" name="wineFlavor" value="dry"> dry
-        </div>
-
-        <div class="wine-weight">
-            <input type="radio" name="wineWeight" value="full-bodied"> complex and full-bodied
-            <input type="radio" name="wineWeight" value="light"> light and crisp
-        </div>
+    <p>To better serve you, would you please let us know your wine preference?</p>
+    <div class=simpleAns>
+      <input type="radio" name="trueFalse" value="true"> Sure! Let's get started!
+      <input type="radio" name="trueFalse" value="false"> Not on your life. I'm outta here.
     </div>
+    <!-- get wine preference input from customer -->
+    <div class="wine-color">
+        <input type="radio" name="wineColor" value="red"> red
+        <input type="radio" name="wineColor" value="white"> white
+    </div>
+
+    <div class="wine-flavor">
+        <input type="radio" name="wineFlavor" value="sweet"> sweet
+        <input type="radio" name="wineFlavor" value="dry"> dry
+    </div>
+
+    <div class="wine-weight">
+        <input type="radio" name="wineWeight" value="full-bodied"> complex and full-bodied
+        <input type="radio" name="wineWeight" value="light"> light and crisp
+    </div>
+
   <script src="https://code.jquery.com/jquery-latest.min.js"></script>
-  <script src="js/bartender.js"></script>
+  <script src="js/sommelier.js"></script>
 
 </body>
 </html>
