@@ -26,7 +26,41 @@ html {
     position: relative;
 }
 
+html,
+body {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: normal;
+    font-size: 18px;
+    text-rendering: optimizeLegibility;
+    color: #333;
+    background-color: #fff;
+    height: 100%;
+}
+
+body {
+    margin: 0.25 auto;
+		max-width: 40em;
+		padding: 1em;
+    font-size: 1.2em;
+		font-weight: bold;
+    line-height: 1.4;
+}
+
+h1,
+h2,
+h3 {
+		font-family: 'Bad Script', cursive;
+		color: #222;
+}
+
+h1 {
+		margin: 0 0 6px;
+    font-size: 2.5em;
+}
+
 /* get answer to question */
 .customer-interview {
+
+    padding: 1em;
     color: #222;
 }
