@@ -42,7 +42,7 @@ $(document).ready( function() {
 
     if (getStarted == "true") {
         $('.simpleAns').hide();
-        $('.wine-color').show();
+        $('.wine-info').show();
         custPreferences.getWineInfo();
     } else {
         return;
