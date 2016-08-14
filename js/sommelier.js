@@ -9,16 +9,17 @@ $('.wine-weight').hide();
 
 var custPreferences = {
 
+    var properties = 
     var custQuestion = ["<p>Do you prefer red wine or white?</p>", "<p>And do you like your wine on the sweet side or dry?</p>", "<p>Do you like your wine to be complex and full-bodied or light, with a crisp finish?</p>"];
+    var custQuestDisplay = ['.wine-color', '.wine-flavor', '.wine-weight'];
 
-    getWineInfo: function(custQuestion) {
-          for (var i=0; i<custQuestion.length); i++) }
-
-          $('.wine-info').prepend(custQuestion[i]);
-
-          $('.wine-info').click( function(e){
+    getWineInfo: function(custQuestion, custQuestDisplay) {
+        for (var i=0; i<custQuestion.length); i++) {
+            $(custQuestDisplay[i]).prepend(custQuestion[i]);
+            $('.wine-info').click( function(e){
               e.preventDefault();
-        var wineColor = $('input[name=wineColor]:checked').val();
+
+            var custPreferences.wineColor = $('input[name=wineColor]:checked').val();
         console.log("wine color preference is " + wineColor);
     });
   }
@@ -42,7 +43,7 @@ $(document).ready( function() {
 
     if (getStarted == "true") {
         $('.simpleAns').hide();
-        $('.wine-info').show();
+
         custPreferences.getWineInfo();
     } else {
         return;
