@@ -7,9 +7,25 @@ $('.wine-color').hide();
 $('.wine-flavor').hide();
 $('.wine-weight').hide();
 
-var custPreferences = {
+var CustPreferences = function(preferences) {
+    this.preferences = preferences;
+}
 
-    var properties = 
+CustPreferences.prototype.addPreference = function(preferences) {
+    this.preferences.push(preferences);
+}
+
+/*var Bartender = function(name) {
+    this.name = name;
+}
+
+Bartender.prototype.createBlend = function(custPreferences) {
+    // create wine blend
+    if (custPreferences.preferences.includes("red") && custPreferences.preferences.includes("sweet"))
+        then
+}
+*/
+
     var custQuestion = ["<p>Do you prefer red wine or white?</p>", "<p>And do you like your wine on the sweet side or dry?</p>", "<p>Do you like your wine to be complex and full-bodied or light, with a crisp finish?</p>"];
     var custQuestDisplay = ['.wine-color', '.wine-flavor', '.wine-weight'];
 
@@ -33,7 +49,7 @@ var custPreferences = {
   }
 */
 };
-
+//everything that handles the user interaction is here
 $(document).ready( function() {
 
     var getStarted = "false";
@@ -51,15 +67,3 @@ $(document).ready( function() {
     });
 
 });
-
-/*
-var winePreferences = {
-  color: ["red","white"],
-  flavor: ["sweet","dry"],
-  weight: ["full=bodied","light and crisp"]
-  wineCustomer:function() {
-    this.preferences = preferences;
-};
-var solange = new wineCustomer(['red', 'dry', 'light']);
-console.log(solange,preferences);
-*/
