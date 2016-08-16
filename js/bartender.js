@@ -90,9 +90,9 @@ $(document).ready( function() {
         });
     });
     var bartender = new Bartender("Lynne");
-    var blend = bartender.createBlend(preferences);
-    $'wine-weight').append("<br><p>" + bartender + " created a " + createBlend.name + " for you!</p>");
-    console.log(bartender + " created a " + createBlend.name + "for you!");
+    //var blend = bartender.createBlend(preferences);
+    //$('wine-weight').append("<br><p>" + bartender + " created a " + createBlend.name + " for you!</p>");
+    //console.log(bartender + " created a " + createBlend.name + "for you!");
 });
 
 /*
