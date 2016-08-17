@@ -2,8 +2,7 @@
 var wineColor = "";
 var wineFlavor = "";
 var wineWeight = "";
-var custQuestion = [];
-var preference = "";
+var selection = "";
 
 $('.wine-color').hide();
 $('.wine-flavor').hide();
@@ -11,31 +10,26 @@ $('.wine-weight').hide();
 
 var CustPreferences = function(preferences) {
     this.preferences = preferences;
-    console.log("preferences are " + this.preferences);
 };
 
-CustPreferences.prototype.addPreference = function(preferences) {
-    this.preferences.push(preferences);
-    console.log('this addpreferences is ' + this.preferences);
+CustPreferences.prototype.addPreference = function(selection) {
+    this.preferences.push(selection);
+    console.log('this addPreferences.preferences are ' + this.preferences);
 };
 
 var Bartender = function(name) {
     this.name = name;
 };
 
-Bartender.prototype.newBlend = function createBlend(preferences)  {
-    // logic to create a drink
-    if (CustPreferences.preferences.contains("red") && CustPreferences.preferences.contains("sweet")) {
-      return new blendName("Six of One");
+Bartender.prototype.newBlend = function(customerSelection)  {
+    // logic to create and name a drink
+    if (customerSelection.contains("red") && customerSelection.contains("sweet")) {
+        return "Six of One";
     } else {
-      if (CustPreferences.preferences.contains("white") && CustPreferences.preferences.contains("dry")) {
-        return new blendName("Bite Your Tongue");
-      }
+        if (customerSelection.contains("white") && customerSelection.contains("dry")) {
+        return "Bite Your Tongue";
+        }
     };
-};
-
-var blendName = function(name) {
-    this.name = name;
 };
 
 $(document).ready( function() {
@@ -44,55 +38,33 @@ $(document).ready( function() {
     $('.wine-color').show();
     $('.wine-color').click( function(e){
         e.preventDefault();
-        var wineColor = $('input[name=wineColor]:checked').val();
+        wineColor = $('input[name=wineColor]:checked').val();
 
-        if (wineColor == ('red')) {
-            var NewPreference = new CustPreferences('red');
-            $('.wine-flavor').prepend("<p>And do you like your red wine sweet or dry?</p>");
-            $('.wine-flavor').show();
+        var newPreference = new CustPreferences([]);
 
-        } else {
+        newPreference.addPreference(wineColor);
+        $('.wine-flavor').prepend("<p>And do you like your " + wineColor + " wine sweet or dry?</p>");
+        $('.wine-flavor').show();
 
-          var NewPreference = new CustPreferences('white');
-          $('.wine-flavor').prepend("<p>And do you like your white wine sweet or dry?</p>");
-          $('.wine-flavor').show();
-        };
+      // get wine flavor preference
+    $('.wine-flavor').click( function(e){
+        e.preventDefault();
+        wineFlavor = $('input[name=wineFlavor]:checked').val();
 
-          // get wine flavor preference
-        $('.wine-flavor').click( function(e){
-            e.preventDefault();
-            var wineFlavor = $('input[name=wineFlavor]:checked').val();
+        newPreference.addPreference(wineFlavor);
+        //$('.wine-weight').prepend("<p>Do you like your " + wineColor + " " + wineFlavor + " wine to resemble a substantial desert wine or to be more light and fruity?</p>");
+        $('.wine-weight').show();
 
-            if (wineColor == 'red') {
+        var bartender = new Bartender('Lynne');
 
-              if (wineFlavor == 'sweet') {
-                  var NewPreference = new CustPreferences.addPreference('sweet');
-                  $('.wine-weight').prepend("<p>Do you like your sweet red wine to resemble a substantial desert wine or to be more light and fruity?</p>");
-                  $('.wine-weight').show();
-              } else {
-                  var NewPreference = new CustPreferences.addPreference('dry');
-                  $('.wine-weight').prepend("<p>Do you like your dry red wine to be complex and full-bodied or light, with a crisp finish?</p>");
-                  $('.wine-weight').show();
-                }
+        wineName = bartender.newBlend(newPreference.preferences);
 
-            }  else {  // wineColor must be 'white'
+        $('wine-weight').append("<br><p>" + bartender.name + " created a " + wineName + " for you!</p>");
+        console.log(bartender.name + " created a " + wineName + " for you!");
 
-              if (wineFlavor == 'sweet') {
-                  var NewPreference = new CustPreferences.addPreference('sweet');
-                  $('.wine-weight').prepend("<p>Do you like your sweet white wine to be a little buttery or more on the fruity side?</p>");
-                  $('.wine-weight').show();
-              } else {
-                  var NewPreference = new CustPreferences.addPreference('dry');
-                  $('.wine-weight').prepend("<p>Do you like your dry white wine to be complex and full-bodied or light, with a crisp finish?</p>");
-                  $('.wine-weight').show();
-                };
-          };  // end of if wineFlavor
-        });
+      });
+
     });
-    var bartender = new Bartender("Lynne");
-    //var blend = bartender.createBlend(preferences);
-    //$('wine-weight').append("<br><p>" + bartender + " created a " + createBlend.name + " for you!</p>");
-    //console.log(bartender + " created a " + createBlend.name + "for you!");
 });
 
 /*
@@ -105,13 +77,4 @@ var wineCellar =
     white.dry.light = "Pinot Grigio";
     white.sweet.full = "Muscato";
     white.sweet.light = "Reisling";
-*/
-/*
-var wineChoice.prototype.wineFlavor = function(flavor) {
-    this.wineFlavor = flavor;
-};
-/*
-var wineChoice.prototype.wineWeight = function(weight) {
-    this.wineWeight = weight;
-};
 */
