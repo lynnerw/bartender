@@ -25,15 +25,14 @@ var Bartender = function(name) {
 // object method is logic to create and name a drink based on selections
 Bartender.prototype.newBlend = function(customerSelection)  {
     if (customerSelection.includes('red')) {
-
-        if(customerSelection.includes('sweet')) {
+        if (customerSelection.includes('sweet')) {
             if (customerSelection.includes('full-bodied')) {
                 return "Six of One";
             } else {  // selection is red, sweet, and light
                 return "Sangria Anyone?";
                 }
         } else {  // selection includes dry
-            if (customerSelection.includes('light')) {
+            if (customerSelection.includes('full-bodied')) {
                 return "Sinful Zinfandel";
                 } else {  //selection is red, dry, and light
                     return "A Light Finish";
@@ -58,14 +57,14 @@ Bartender.prototype.newBlend = function(customerSelection)  {
 
 $(document).ready( function() {
 
+  var Preference = new CustPreferences([]);
+
       // get wine color preference
     $('.wine-color').prepend("<p>Do you prefer red wine or white wine?</p>");
     $('.wine-color').show();
     $('.wine-color').click( function(e) {
         e.preventDefault();
         wineColor = $('input[name=wineColor]:checked').val();
-
-        var Preference = new CustPreferences([]);
 
         Preference.addPreference(wineColor);
         $('.wine-color').hide();
@@ -83,10 +82,9 @@ $(document).ready( function() {
             // get wine weight - heavy or light - preference
             $('.wine-weight').prepend("<p>Do you like a full-bodied " + wineFlavor + " " + wineColor + " " + " wine or a lighter blend?</p>");
             $('.wine-weight').show();
-
             $('.wine-weight').click( function(e) {
                 e.preventDefault();
-                wineWeight = $('input[name=wineFlavor]:checked').val();
+                wineWeight = $('input[name=wineWeight]:checked').val();
 
                 Preference.addPreference(wineWeight);
                 $('.wine-weight').hide();
