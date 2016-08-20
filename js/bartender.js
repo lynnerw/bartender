@@ -33,22 +33,22 @@ Bartender.prototype.newBlend = function(customerSelection)  {
                 return "Sangria Anyone?";
                 }
         } else {  // selection includes dry
-            if (customerSelection.includes('full-bodied')) {
+            if (customerSelection.includes('light')) {
                 return "Sinful Zinfandel";
                 } else {  //selection is red, dry, and light
                     return "A Light Finish";
                     }
             }
-    } else {  // selection is white
+    } else {  // selection includes white
         if (customerSelection.includes('sweet')) {
             if (customerSelection.includes('full-bodied')) {
-                return "Soft Sancerne";
+                return "A Softer Sancerne";
                 } else {  // selection is white, sweet, and light
-                    return "Reisling Memories";
+                    return "Memories of Reisling";
                     }
-            } else {
-                if (customerSelection.includes('full-bodied')) {
-                      return "Mostly Moscato";
+            } else {  // selection is white and dry
+                if (customerSelection.includes('light')) {
+                      return "A Petite Pinot Gris";
                       } else {  //selection is white, dry, and light
                           return "Bite Your Tongue";
                           }
@@ -61,37 +61,51 @@ $(document).ready( function() {
       // get wine color preference
     $('.wine-color').prepend("<p>Do you prefer red wine or white wine?</p>");
     $('.wine-color').show();
-    $('.wine-color').click( function(e){
+    $('.wine-color').click( function(e) {
         e.preventDefault();
         wineColor = $('input[name=wineColor]:checked').val();
 
         var Preference = new CustPreferences([]);
 
         Preference.addPreference(wineColor);
+        $('.wine-color').hide();
+
+        // get wine flavor preference
         $('.wine-flavor').prepend("<p>And do you like your " + wineColor + " wine sweet or dry?</p>");
         $('.wine-flavor').show();
+        $('.wine-flavor').click( function(e) {
+            e.preventDefault();
+            wineFlavor = $('input[name=wineFlavor]:checked').val();
 
-      // get wine flavor preference
-    $('.wine-flavor').click( function(e){
-        e.preventDefault();
-        wineFlavor = $('input[name=wineFlavor]:checked').val();
+            Preference.addPreference(wineFlavor);
+            $('.wine-flavor').hide();
 
-        Preference.addPreference(wineFlavor);
-        $('.wine-weight').prepend("<p>Do you like a full-bodied " + wineFlavor + " " + wineColor + " " + " wine or a lighter blend?</p>");
-        $('.wine-weight').show();
+            // get wine weight - heavy or light - preference
+            $('.wine-weight').prepend("<p>Do you like a full-bodied " + wineFlavor + " " + wineColor + " " + " wine or a lighter blend?</p>");
+            $('.wine-weight').show();
 
-        // bartender delivers new wine blend
-        var bartender = new Bartender('Lynne');
+            $('.wine-weight').click( function(e) {
+                e.preventDefault();
+                wineWeight = $('input[name=wineFlavor]:checked').val();
 
-        wineName = bartender.newBlend(Preference.preferences);
+                Preference.addPreference(wineWeight);
+                $('.wine-weight').hide();
 
-        $('.deliver-blend').show();
-        $('.deliver-blend').prepend("<p><br>" + bartender.name + " created a \"" + wineName + "\" wine blend for you!</p>");
-        console.log(bartender.name + " created a " + wineName + " for you!");
+                // bartender delivers new wine blend
+                var bartender = new Bartender('Lynne');
 
-      });
+                wineName = bartender.newBlend(Preference.preferences);
 
-    });
+                $('.deliver-blend').show();
+                $('.deliver-blend').prepend("<p><br>" + bartender.name + " created a \"" + wineName + "\" wine blend for you!</p>");
+                console.log(bartender.name + " created a " + wineName + " for you! Enjoy!");
+
+                });  // end get wine weight preference
+
+          }); // end get wine flavor preference
+
+    }); // end get wine color preference
+
 });
 
 /*
