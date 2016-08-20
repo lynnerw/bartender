@@ -42,7 +42,6 @@ body {
 		max-width: 40em;
 		padding: 1em;
     font-size: 1.2em;
-		font-weight: bold;
     line-height: 1.4;
 }
 
@@ -56,6 +55,12 @@ h3 {
 h1 {
 		margin: 0 0 6px;
     font-size: 2.5em;
+}
+
+h2 {
+    font-size: 1.5em;
+    line-height: 1.5;
+    margin: .3em 0;
 }
 
 /* get answer to question */

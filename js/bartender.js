@@ -22,17 +22,38 @@ var Bartender = function(name) {
     this.name = name;
 };
 
+// object method is logic to create and name a drink based on selections
 Bartender.prototype.newBlend = function(customerSelection)  {
-    // logic to create and name a drink
-    if(customerSelection.includes("red") && customerSelection.includes("sweet")) {
-            return "Six of One";
-    } else
-          //if (customerSelection.includes("red") && (customerSelection.includes("dry"))
-          //    return "A Fine Finish";
-          // else   //customer selection is white
-        if(customerSelection.includes("white") && customerSelection.includes("dry")) {
-        return "Bite Your Tongue";
-        }
+    if (customerSelection.includes('red')) {
+
+        if(customerSelection.includes('sweet')) {
+            if (customerSelection.includes('full-bodied')) {
+                return "Six of One";
+            } else {  // selection is red, sweet, and light
+                return "Sangria Anyone?";
+                }
+        } else {  // selection includes dry
+            if (customerSelection.includes('full-bodied')) {
+                return "Sinful Zinfandel";
+                } else {  //selection is red, dry, and light
+                    return "A Light Finish";
+                    }
+            }
+    } else {  // selection is white
+        if (customerSelection.includes('sweet')) {
+            if (customerSelection.includes('full-bodied')) {
+                return "Soft Sancerne";
+                } else {  // selection is white, sweet, and light
+                    return "Reisling Memories";
+                    }
+            } else {
+                if (customerSelection.includes('full-bodied')) {
+                      return "Mostly Moscato";
+                      } else {  //selection is white, dry, and light
+                          return "Bite Your Tongue";
+                          }
+                    }
+            }
 };
 
 $(document).ready( function() {
@@ -56,8 +77,8 @@ $(document).ready( function() {
         wineFlavor = $('input[name=wineFlavor]:checked').val();
 
         Preference.addPreference(wineFlavor);
-        //$('.wine-weight').prepend("<p>Do you like your " + wineColor + " " + wineFlavor + " wine to resemble a substantial desert wine or to be more light and fruity?</p>");
-        //$('.wine-weight').show();
+        $('.wine-weight').prepend("<p>Do you like a full-bodied " + wineFlavor + " " + wineColor + " " + " wine or a lighter blend?</p>");
+        $('.wine-weight').show();
 
         // bartender delivers new wine blend
         var bartender = new Bartender('Lynne');
@@ -65,7 +86,7 @@ $(document).ready( function() {
         wineName = bartender.newBlend(Preference.preferences);
 
         $('.deliver-blend').show();
-        $('.deliver-blend').prepend("<p>" + bartender.name + " created a \"" + wineName + "\" wine blend for you!</p>");
+        $('.deliver-blend').prepend("<p><br>" + bartender.name + " created a \"" + wineName + "\" wine blend for you!</p>");
         console.log(bartender.name + " created a " + wineName + " for you!");
 
       });
