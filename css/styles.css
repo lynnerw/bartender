@@ -63,6 +63,25 @@ h2 {
     margin: .3em 0;
 }
 
+.add-wine {
+    font-size: 1em;
+    margin: .5em;
+    padding: .5em;
+}
+
+.input-field {
+    font-family: inherit;
+    font-size: 1em;
+    line-height: 1.5;
+    border-width: 2px;
+}
+
+.button {
+    font-family: inherit;
+    font-size: 1em;
+    border-width: 5px;
+}
+
 /* get answer to question */
 .customer-interview {
 
