@@ -1,11 +1,13 @@
-
+var wineType = '';
 var wineColor = '';
 var wineFlavor = '';
 var wineWeight = '';
 var selection = '';
+var newBlend = '';
 var bottlesStocked = 0;
 var min = 0;
 var restockDone = '';
+var wineCellar = '[]';
 
 /*
 $('.wine-color').hide();
@@ -35,12 +37,13 @@ Restock.prototype.stockWine = function(wineType, wineColor, wineFlavor, wineWeig
       flavor: wineFlavor,
       weight: wineWeight
     });
+    wineCellar = (this.cellar);
     bottlesStocked = this.cellar.length;
 };
 
 // generate random number to return one of the wines in the cellar
 function getRandomArrayIndex(min, bottleStocked) {
-    return Math.random() * (bottlesStocked - min) + min;
+    return Math.floor(Math.random()*(bottlesStocked-min + 1) + min);
 }
 
 // constructor function for barkeep to create and serve a wineblend or a burger
@@ -54,7 +57,8 @@ Barkeep.prototype.newBlend = function(customerSelection)  {
     if (customerSelection.includes('red')) {
         if (customerSelection.includes('sweet')) {
             if (customerSelection.includes('full-bodied')) {
-                return ('Six of One'); 
+                newBlend = ('Six of One is a blend of ' + wineCellar[getRandomArrayIndex(min, bottlesStocked)].type);
+                return newBlend;
             } else {  // selection is red, sweet, and light
                 return 'Sangria Anyone?';
                 }
@@ -111,13 +115,20 @@ $(document).ready( function() {
 
                 $('.restock-done').click( function(){
                     if('input[name=restock]:checked') {
-                    console.log('we\'re done');
-                    $('.barkeep').hide();
-                    role = '';
-                    $('.user-role').show();
-                    return role;
-                  } else {
-                    console.log('not done yet');
+                        console.log('we\'re done');
+                        // hide barkeep content, clear user role, clear radio buttons and checkbox
+                        $('.barkeep').hide();
+                        role = '';
+                        $('input[name=wineName]').val('');
+                        $('input[name=wineColor]').prop('checked', false);
+                        $('input[name=wineFlavor]').prop('checked', false);
+                        $('input[name=wineWeight]').prop('checked', false);
+
+                        // provide ability to reset user role
+                        $('.user-role').show();
+                        return role;
+                    } else {
+                        console.log('not done yet');
                   }
                 });
             }); // end barkeep tasks
