@@ -19,9 +19,11 @@
 
       <!-- user identifies as barkeep -->
       <div id="identify" class="barkeep">
+
           <p>Barkeep: Stock your wine cellar</p>
+
           <form class="add-wine">
-                <input type="text" maxlength="15" name="wineName" placeholder="Type of wine">
+              <input type="text" maxlength="15" name="wineName" placeholder="Type of wine">
 
               <!-- barkeep enters wine attributes -->
               <div class="wine-color">
@@ -40,9 +42,14 @@
               </div>
               <input type="submit" value="Add">
           </form>
-      </div>
+          <br><br>
+          <form class="restock-done">
+              <input type="checkbox" name="restock" value="done"> Done restocking</label><br>
+          </form>
 
-      <!-- user identifies as customer -->
+      </div> <!-- end user role is barkeep -->
+
+      <!-- user role is customer -->
       <div id="identify" class="customer">
           <p>Blending grape varieties to balance multiple flavors and aromas is done in the Bordeaux and Rhône regions of France, so why not here?<br><br></p>
           <p>We've fine-tuned the possibilities so you don't have to risk spoiling your favorite red zin or pinot gris. And each blend is garnished to highlight unique flavors and aromas.<br><br></p>

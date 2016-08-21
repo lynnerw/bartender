@@ -3,6 +3,9 @@ var wineColor = '';
 var wineFlavor = '';
 var wineWeight = '';
 var selection = '';
+var bottlesStocked = 0;
+var min = 0;
+var restockDone = '';
 
 /*
 $('.wine-color').hide();
@@ -32,7 +35,13 @@ Restock.prototype.stockWine = function(wineType, wineColor, wineFlavor, wineWeig
       flavor: wineFlavor,
       weight: wineWeight
     });
+    bottlesStocked = this.cellar.length;
 };
+
+// generate random number to return one of the wines in the cellar
+function getRandomArrayIndex(min, bottleStocked) {
+    return Math.random() * (bottlesStocked - min) + min;
+}
 
 // constructor function for barkeep to create and serve a wineblend or a burger
 var Barkeep = function(personName, makeItem) {
@@ -45,7 +54,7 @@ Barkeep.prototype.newBlend = function(customerSelection)  {
     if (customerSelection.includes('red')) {
         if (customerSelection.includes('sweet')) {
             if (customerSelection.includes('full-bodied')) {
-                return 'Six of One';
+                return ('Six of One'); 
             } else {  // selection is red, sweet, and light
                 return 'Sangria Anyone?';
                 }
@@ -100,12 +109,24 @@ $(document).ready( function() {
 
                 WineDelivery.stockWine(wineType, wineColor, wineFlavor, wineWeight);
 
-            });
+                $('.restock-done').click( function(){
+                    if('input[name=restock]:checked') {
+                    console.log('we\'re done');
+                    $('.barkeep').hide();
+                    role = '';
+                    $('.user-role').show();
+                    return role;
+                  } else {
+                    console.log('not done yet');
+                  }
+                });
+            }); // end barkeep tasks
+
         } else {
-            // get wine color preference
+            // get customer preferences
             $('.customer').show();
 
-            var Preference = new CustPreferences([]);
+            var BlendPreference = new CustPreferences([]);
 
             $('.wine-color').prepend("<p>Do you prefer red wine or white wine?</p>");
             $('.wine-color').show();
@@ -113,7 +134,7 @@ $(document).ready( function() {
                 e.preventDefault();
                 wineColor = $('input[name=wineColor]:checked').val();
 
-                Preference.addPreference(wineColor);
+                BlendPreference.addPreference(wineColor);
                 $('.wine-color').hide();
 
                 // get wine flavor preference
@@ -123,7 +144,7 @@ $(document).ready( function() {
                     e.preventDefault();
                     wineFlavor = $('input[name=wineFlavor]:checked').val();
 
-                    Preference.addPreference(wineFlavor);
+                    BlendPreference.addPreference(wineFlavor);
                     $('.wine-flavor').hide();
 
                     // get wine weight - heavy or light - preference
@@ -133,13 +154,13 @@ $(document).ready( function() {
                         e.preventDefault();
                         wineWeight = $('input[name=wineWeight]:checked').val();
 
-                        Preference.addPreference(wineWeight);
+                        BlendPreference.addPreference(wineWeight);
                         $('.wine-weight').hide();
 
-                        // bartender delivers new wine blend
+                        // bartenderhas to make a wine blend
                         var barkeep = new Barkeep('Lynne', 'makeWineBlend');
 
-                        wineName = barkeep.newBlend(Preference.preferences);
+                        wineName = barkeep.newBlend(BlendPreference.preferences);
 
                         $('.deliver-blend').show();
                         $('.deliver-blend').prepend("<p><br>" + barkeep.name + " created a \"" + wineName + "\" wine blend for you!</p>");
