@@ -7,8 +7,7 @@ var blend = '';
 var bottlesStocked = 0;
 var min = 0;
 var restockDone = '';
-var wineCellar = '[]';
-
+var wineCellar = '[]'
 
 // collecting a customer's preferences
 var CustPreferences = function(preferences) {
@@ -26,10 +25,10 @@ var Restock = function(item) {
 
 Restock.prototype.stockWine = function(wineType, wineColor, wineFlavor, wineWeight) {
     this.cellar.push({
-      type: wineType,
-      color: wineColor,
-      flavor: wineFlavor,
-      weight: wineWeight
+        type: wineType,
+        color: wineColor,
+        flavor: wineFlavor,
+        weight: wineWeight
     });
     wineCellar = (this.cellar);
     bottlesStocked = this.cellar.length;
@@ -51,7 +50,7 @@ Barkeep.prototype.newBlend = function(customerSelection)  {
     if (customerSelection.includes('red')) {
         if (customerSelection.includes('sweet')) {
             if (customerSelection.includes('full-bodied')) {
-                blend = ('Six of One is a blend of ' + wineCellar[getRandomArrayIndex(min, bottlesStocked)].type);
+                blend = ('\"Six of One,\" a ' + wineCellar[getRandomArrayIndex(0, bottlesStocked)].type + ' and ' + wineCellar[getRandomArrayIndex(0, bottlesStocked)].type);
                 return blend;
             } else {  // selection is red, sweet, and light
                 return 'Sangria Anyone?';
@@ -107,7 +106,8 @@ $(document).ready( function() {
 
                 WineDelivery.stockWine(wineType, wineColor, wineFlavor, wineWeight);
 
-                $('.restock-done').click( function(){
+                $('.restock-done').click( function(e) {
+                    e.preventDefault();
                     if('input[name=restock]:checked') {
                         // hide barkeep content, clear user role, clear radio buttons and checkbox
                         $('.barkeep').hide();
@@ -162,14 +162,26 @@ $(document).ready( function() {
                         BlendPreference.addPreference(wineWeight);
                         $('.wine-weight').hide();
 
-                        // bartenderhas to make a wine blend
+                        // bartender has to make a wine blend
                         var barkeep = new Barkeep('Lynne', 'makeWineBlend');
 
+                        // get new wine blend name and mix
                         wineName = barkeep.newBlend(BlendPreference.preferences);
 
+                        $('input[name=wineName]').val('');
+                        $('input[name=wineColor]').prop('checked', false);
+                        $('input[name=wineFlavor]').prop('checked', false);
+                        $('input[name=wineWeight]').prop('checked', false);
+                        $('input[name=restock]').prop('checked', false);
+
+                        // hide barkeep content, clear user role, clear radio buttons and checkbox
+                        $('.wine-color').hide();
+                        $('.wine-flavor').hide();
+                        $('.wine-weight').hide();
+
+                        // deliver new wine blend
                         $('.deliver-blend').show();
-                        $('.deliver-blend').prepend("<p><br>" + barkeep.name + " created a \"" + wineName + "\" wine blend for you!</p>");
-                        console.log(barkeep.name + " created a " + wineName);
+                        $('.deliver-blend').prepend("<p><br>" + barkeep.name + " created " + wineName + " blend for you!</p>");
 
                         });  // end get wine weight preference
 
@@ -180,4 +192,5 @@ $(document).ready( function() {
           }; // end role of customer
 
       }); // end identify role
+
 });
