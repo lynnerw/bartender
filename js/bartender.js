@@ -122,7 +122,6 @@ $(document).ready( function() {
                         $('.user-role').show();
                         return role;
                     } else {
-                        console.log('not done yet');
                   }
                 });
             }); // end barkeep tasks
@@ -168,16 +167,12 @@ $(document).ready( function() {
                         // get new wine blend name and mix
                         wineName = barkeep.newBlend(BlendPreference.preferences);
 
+                        // clear input text and radio values
                         $('input[name=wineName]').val('');
                         $('input[name=wineColor]').prop('checked', false);
                         $('input[name=wineFlavor]').prop('checked', false);
                         $('input[name=wineWeight]').prop('checked', false);
                         $('input[name=restock]').prop('checked', false);
-
-                        // hide barkeep content, clear user role, clear radio buttons and checkbox
-                        $('.wine-color').hide();
-                        $('.wine-flavor').hide();
-                        $('.wine-weight').hide();
 
                         // deliver new wine blend
                         $('.deliver-blend').show();
