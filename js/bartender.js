@@ -34,9 +34,10 @@ Restock.prototype.stockWine = function(wineType, wineColor, wineFlavor, wineWeig
     });
 };
 
+// constructor function for barkeep to create and serve a wineblend or a burger
 var Barkeep = function(personName, makeItem) {
     this.name = personName;
-    this.create = makeItem
+    this.create = makeItem;
 };
 
 // object method is logic to create and name a drink based on selections
@@ -136,7 +137,7 @@ $(document).ready( function() {
                         $('.wine-weight').hide();
 
                         // bartender delivers new wine blend
-                        var barkeep = new Barkeep('Lynne', makeWineBlend);
+                        var barkeep = new Barkeep('Lynne', 'makeWineBlend');
 
                         wineName = barkeep.newBlend(Preference.preferences);
 
