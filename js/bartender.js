@@ -4,10 +4,7 @@ var wineFlavor = '';
 var wineWeight = '';
 var selection = '';
 var blend = '';
-var bottlesStocked = 0;
 var min = 0;
-var restockDone = '';
-var wineCellar = '[]'
 
 // collecting a customer's preferences
 var CustPreferences = function(preferences) {
@@ -19,24 +16,26 @@ CustPreferences.prototype.addPreference = function(selection) {
 };
 
 // adding to inventory and tagging it
-var Restock = function(item) {
-    this.cellar = item;
+var Inventory = function() {
+    this.cellar = [];
 };
 
-Restock.prototype.stockWine = function(wineType, wineColor, wineFlavor, wineWeight) {
+Inventory.prototype.stockWine = function(wineType, wineColor, wineFlavor, wineWeight) {
     this.cellar.push({
         type: wineType,
         color: wineColor,
         flavor: wineFlavor,
         weight: wineWeight
     });
-    wineCellar = (this.cellar);
-    bottlesStocked = this.cellar.length;
 };
 
+var wineInventory = new Inventory();
+
 // generate random number to return one of the wines in the cellar
-function getRandomArrayIndex(min, bottleStocked) {
-    return Math.floor(Math.random()*(bottlesStocked-min + 1) + min);
+function getRandomArrayIndex(inventory) {
+    var bottlesStocked = inventory.cellar.length;
+    var randomIndex = Math.floor(Math.random() * bottlesStocked);
+    return inventory.cellar[randomIndex];
 }
 
 // constructor function for barkeep to create and serve a wineblend or a burger
@@ -46,11 +45,12 @@ var Barkeep = function(personName, makeItem) {
 };
 
 // object method is logic to create and name a drink based on selections
-Barkeep.prototype.newBlend = function(customerSelection)  {
+Barkeep.prototype.newBlend = function(customerPreferences)  {
+    var customerSelection = customerPreferences.preferences;
     if (customerSelection.includes('red')) {
         if (customerSelection.includes('sweet')) {
             if (customerSelection.includes('full-bodied')) {
-                blend = ('\"Six of One,\" a ' + wineCellar[getRandomArrayIndex(0, bottlesStocked)].type + ' and ' + wineCellar[getRandomArrayIndex(0, bottlesStocked)].type);
+                blend = '\"Six of One,\" a ' + getRandomArrayIndex(wineInventory).type + ' and ' + getRandomArrayIndex(wineInventory).type;
                 return blend;
             } else {  // selection is red, sweet, and light
                 return 'Sangria Anyone?';
@@ -79,7 +79,7 @@ Barkeep.prototype.newBlend = function(customerSelection)  {
             }
 };
 
-$(document).ready( function() {
+$(document).ready(function() {
 
     $('.barkeep').hide();
     $('.customer').hide();
@@ -94,8 +94,6 @@ $(document).ready( function() {
             // stock the wine cellar
             $('.barkeep').show();
 
-            var WineDelivery = new Restock([]);
-
             $('input[type=submit]').click( function(e) {
                 e.preventDefault();
                 var wineType = $('input[name=wineName]').val();
@@ -104,7 +102,7 @@ $(document).ready( function() {
                 wineFlavor = $('input[name=wineFlavor]:checked').val();
                 wineWeight = $('input[name=wineWeight]:checked').val();
 
-                WineDelivery.stockWine(wineType, wineColor, wineFlavor, wineWeight);
+                wineInventory.stockWine(wineType, wineColor, wineFlavor, wineWeight);
 
                 $('.restock-done').click( function(e) {
                     e.preventDefault();
@@ -129,6 +127,9 @@ $(document).ready( function() {
         } else {
             // get customer preferences
             $('.customer').show();
+
+            $('.wine-flavor').hide();
+            $('.wine-weight').hide();
 
             var BlendPreference = new CustPreferences([]);
 
@@ -165,7 +166,7 @@ $(document).ready( function() {
                         var barkeep = new Barkeep('Lynne', 'makeWineBlend');
 
                         // get new wine blend name and mix
-                        wineName = barkeep.newBlend(BlendPreference.preferences);
+                        wineName = barkeep.newBlend(BlendPreference);
 
                         // clear input text and radio values
                         $('input[name=wineName]').val('');
