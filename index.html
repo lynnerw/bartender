@@ -13,8 +13,11 @@
 
       <div id="identify" class="user-role">
           <p><br>Excuse me, but are you the barkeep or the customer?</p>
-          <input type="radio" name="serveOrsip" value="serve"> Barkeep
-          <input type="radio" name="serveOrsip" value="sip"> Customer
+
+          <input type="radio" name="serveOrsip" id="barkeep" value="serve">
+              <label for="barkeep">Barkeep</label>
+          <input type="radio" name="serveOrsip" id="customer" value="sip">
+              <label for="customer">Customer</label>
       </div>
 
       <!-- user role is barkeep -->
@@ -27,24 +30,31 @@
               <br><label>Now choose some attributes:</label>
               <!-- barkeep enters wine attributes -->
               <div class="wine-color">
-                  <input type="radio" name="wineColor" value="red"> red
-                  <input type="radio" name="wineColor" value="white"> white
+                  <input type="radio" name="wineColor" id="red" value="red">
+                      <label for="red">red</label>
+                  <input type="radio" name="wineColor" d="white" value="white">
+                      <label for="white">white</label>
               </div>
 
               <div class="wine-flavor">
-                  <input type="radio" name="wineFlavor" value="sweet"> sweet
-                  <input type="radio" name="wineFlavor" value="dry"> dry
+                  <input type="radio" name="wineFlavor" id="sweet" value="sweet">
+                      <label for="sweet">sweet</label>
+                  <input type="radio" name="wineFlavor" id="dry" value="dry">
+                      <label for="dry">dry</label>
               </div>
 
               <div class="wine-weight">
-                  <input type="radio" name="wineWeight" value="full-bodied"> complex and full-bodied
-                  <input type="radio" name="wineWeight" value="light"> light and crisp
+                  <input type="radio" name="wineWeight" id="full" value="full-bodied">
+                      <label for="full">complex and full-bodied</label>
+                  <input type="radio" name="wineWeight" id="light" value="light">
+                      <label for="light">light and crisp</lable>
               </div>
               <input class="button" type="submit" value="Add bottle to cellar">
           </form>
 
           <form class="restock-done">
-              <input type="checkbox" name="restock" value="done"> Done restocking</label><br>
+              <input type="checkbox" name="restock" id="restock" value="done">
+                  <label>Done restocking</label><br>
           </form>
 
       </div> <!-- end user role is barkeep -->
@@ -57,18 +67,24 @@
 
           <!-- get customer's wine preferences -->
           <div class="wine-color">
-              <input type="radio" name="wineColor" value="red"> red
-              <input type="radio" name="wineColor" value="white"> white
+            <input type="radio" name="wineColor" id="red" value="red">
+                <label for="red">red</label>
+            <input type="radio" name="wineColor" d="white" value="white">
+                <label for="white">white</label>
           </div>
 
           <div class="wine-flavor">
-              <input type="radio" name="wineFlavor" value="sweet"> sweet
-              <input type="radio" name="wineFlavor" value="dry"> dry
+            <input type="radio" name="wineFlavor" id="sweet" value="sweet">
+                <label for="sweet">sweet</label>
+            <input type="radio" name="wineFlavor" id="dry" value="dry">
+                <label for="dry">dry</label>
           </div>
 
           <div class="wine-weight">
-              <input type="radio" name="wineWeight" value="full-bodied"> complex and full-bodied
-              <input type="radio" name="wineWeight" value="light"> light and crisp
+            <input type="radio" name="wineWeight" id="full" value="full-bodied">
+                <label for="full">complex and full-bodied</label>
+            <input type="radio" name="wineWeight" id="light" value="light">
+                <label for="light">light and crisp</lable>
           </div>
 
           <div class="deliver-blend"></div>
