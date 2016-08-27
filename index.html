@@ -8,62 +8,62 @@
   </head>
 
   <body>
-      <h1 style="text-align: center">Welcome to Windswept Winery</h1>
-      <h2 style="text-align: center"> ~ Purveyor of fine wine blends ~ </h2>
+      <header>
+          <h1 style="text-align: center">Welcome to Windswept Winery</h1>
+          <h2 style="text-align: center"> ~ Purveyor of fine wine blends ~ </h2>
 
-      <div id="identify" class="user-role">
-          <p><br>Excuse me, but are you the barkeep or the customer?</p>
-
-          <input type="radio" name="serveOrsip" id="barkeep" value="serve">
-              <label for="barkeep">Barkeep</label>
-          <input type="radio" name="serveOrsip" id="customer" value="sip">
-              <label for="customer">Customer</label>
-      </div>
+          <div class="user-role">
+              <p><br>Excuse me, but are you the barkeep or the customer?</p>
+              <input type="radio" name="userRole" id="barkeep" value="serve">
+                  <label for="barkeep">Barkeep</label>
+              <input type="radio" name="userRole" id="customer" value="sip">
+                  <label for="customer">Customer</label>
+          </div>
+      </header>
 
       <!-- user role is barkeep -->
-      <div id="role" class="barkeep">
+      <div id="barkeepRole">
 
-          <p>Barkeep: It's time to restock your wine cellar:</p>
+          <div id="restock">
+              <p>Okay Barkeep; it's time to restock your wine cellar:</p>
+              <label>Enter the type of wine you're restocking: <input class="input-field" type="text" maxlength="15" name="wineName" placeholder="e.g. cabernet"></label>
+              <br><label>Now tag it for search later:</label>
 
-          <form class="add-wine">
-              <label>Enter the type of wine: <input class="input-field" type="text" maxlength="15" name="wineName" placeholder="e.g. cabernet"></label>
-              <br><label>Now choose some attributes:</label>
               <!-- barkeep enters wine attributes -->
-              <div class="wine-color">
+              <div class="grape-color">
                   <input type="radio" name="wineColor" id="red" value="red">
                       <label for="red">red</label>
                   <input type="radio" name="wineColor" d="white" value="white">
                       <label for="white">white</label>
               </div>
 
-              <div class="wine-flavor">
+              <div class="grape-flavor">
                   <input type="radio" name="wineFlavor" id="sweet" value="sweet">
                       <label for="sweet">sweet</label>
                   <input type="radio" name="wineFlavor" id="dry" value="dry">
                       <label for="dry">dry</label>
               </div>
 
-              <div class="wine-weight">
+              <div class="grape-weight">
                   <input type="radio" name="wineWeight" id="full" value="full-bodied">
                       <label for="full">complex and full-bodied</label>
                   <input type="radio" name="wineWeight" id="light" value="light">
                       <label for="light">light and crisp</lable>
               </div>
               <input class="button" type="submit" value="Add bottle to cellar">
-          </form>
+              <div id="restock-done">
+                  <input type="checkbox" name="restock" id="restock" value="done">
+                      <label>Done restocking?</label><br>
+              </div>
 
-          <form class="restock-done">
-              <input type="checkbox" name="restock" id="restock" value="done">
-                  <label>Done restocking</label><br>
-          </form>
+          </div>
 
-      </div> <!-- end user role is barkeep -->
+      </div> <!-- end id="barkeepRole" -->
 
       <!-- user role is customer -->
-      <div id="role" class="customer">
-          <p>Blending grape varieties to balance multiple flavors and aromas is done in the Bordeaux and Rhône regions of France, so why not here?<br><br></p>
-          <p>We've fine-tuned the possibilities so you don't have to risk spoiling your favorite red zin or pinot gris.<br><br></p>
-          <p>To mix the perfect blend for you, we'd like know a little about your wine preferences.<br><br></p>
+      <div id="customerRole">
+          <p>Blending grape varieties to balance multiple flavors and aromas is done in the Bordeaux and Rhône regions of France, so why not here?
+          <br><br>To mix the perfect blend for you, we'd like know a little about your wine preferences.<br></p>
 
           <!-- get customer's wine preferences -->
           <div class="wine-color">
@@ -88,7 +88,7 @@
           </div>
 
           <div class="deliver-blend"></div>
-      </div>
+      </div> <!-- end id="customerRole" -->
 
       <!-- load js after html -->
       <script src="https://code.jquery.com/jquery-latest.min.js"></script>
