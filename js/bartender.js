@@ -1,10 +1,17 @@
-var wineType = '';
+
+// user role to display correct UI
+var role = '';
+
+// variables for barkeep wine cellar properties
+var grapeName = '';
+var grapeColor = '';
+var grapeFlavor = '';
+var grapeWeight = '';
+
+// variables for customer wine preference properties
 var wineColor = '';
 var wineFlavor = '';
 var wineWeight = '';
-var selection = '';
-var blend = '';
-var min = 0;
 
 // collecting a customer's preferences
 var CustPreferences = function(preferences) {
@@ -20,16 +27,14 @@ var Inventory = function() {
     this.cellar = [];
 };
 
-Inventory.prototype.stockWine = function(wineType, wineColor, wineFlavor, wineWeight) {
+Inventory.prototype.stockWine = function(grapeName, grapeColor, grapeFlavor, grapeWeight) {
     this.cellar.push({
-        type: wineType,
-        color: wineColor,
-        flavor: wineFlavor,
-        weight: wineWeight
+        type: grapeName,
+        color: grapeColor,
+        flavor: grapeFlavor,
+        weight: grapeWeight
     });
 };
-
-var wineInventory = new Inventory();
 
 // generate random number to return one of the wines in the cellar
 function getRandomWine(inventory) {
@@ -81,113 +86,107 @@ Barkeep.prototype.newBlend = function(customerPreferences)  {
 $(document).ready(function() {
 
     $('#barkeepRole').hide();
-    $('#customerRole').hide();
+    $('#customerIntro').hide();
+    $('.wine-color').hide();
+    $('.wine-flavor').hide();
+    $('.wine-weight').hide();
 
     // check user role
-    $('.user-role').click( function(e) {
+    $('#userRole').on('click', function(e) {
         e.preventDefault();
         role = $('input[name=userRole]:checked').val();
-        $('.user-role').hide();
-
+        $('#userRole').hide();
 
         if (role === 'serve') {
 
             // role = barkeep; stock the wine cellar
+            var wineInventory = new Inventory();
+
             $('#barkeepRole').show();
 
             $('input[type=submit]').click( function(e) {
+                  e.preventDefault();
+                  var grapeName = $('input[name=grapeName]').val();
+                  $('input[name=grapeName]').val('');
+                  grapeColor = $('input[name=grapeColor]:checked').val();
+                  grapeFlavor = $('input[name=grapeFlavor]:checked').val();
+                  grapeWeight = $('input[name=grapeWeight]:checked').val();
+
+                  wineInventory.stockWine(grapeName, grapeColor, grapeFlavor, grapeWeight);
+            });
+
+            $('#restock-done').click( function(e) {
                 e.preventDefault();
-                var grapeVarietal = $('input[name=wineName]').val();
-                $('input[name=wineName]').val('');
-                grapeColor = $('input[name=wineColor]:checked').val();
-                grapeFlavor = $('input[name=wineFlavor]:checked').val();
-                grapeWeight = $('input[name=wineWeight]:checked').val();
 
-                wineInventory.stockWine(wineType, wineColor, wineFlavor, wineWeight);
+                // hide barkeep content, clear user role, clear radio buttons and checkbox
+                $('#barkeepRole').hide();
+                role = '';
+                $('input[name=grapeName]').val('');
+                $('input[name=grapeColor]').prop('checked', false);
+                $('input[name=grapeFlavor]').prop('checked', false);
+                $('input[name=grapeWeight]').prop('checked', false);
+                $('input[name=restock]').prop('checked', false);
 
-                $('#restock-done').click( function(e) {
-                    e.preventDefault();
-                    if('input[name=restock]:checked') {
-                        // hide barkeep content, clear user role, clear radio buttons and checkbox
-                        $('#barkeepRole').hide();
-                        role = '';
-                        $('input[name=wineName]').val('');
-                        $('input[name=wineColor]').prop('checked', false);
-                        $('input[name=wineFlavor]').prop('checked', false);
-                        $('input[name=wineWeight]').prop('checked', false);
-                        $('input[name=restock]').prop('checked', false);
+                // provide opportunity for another UI role selection
+                $('#userRole').show();
 
-                        // provide ability to reset user role
-                        $('.user-role').show();
-                        return role;
-                    } else {
-                  }
-                });
-            }); // end role = barkeep
+               });   //end restock-done
 
-        } else {
-            // role = sip; get customer preferences
-            $('#customerRole').show();
+        } else {     // end role = barkeep
 
-            $('.wine-flavor').hide();
-            $('.wine-weight').hide();
+            // role = customer; get wine preferences
+            $('#customerIntro').show();
 
             var BlendPreference = new CustPreferences([]);
 
             $('.wine-color').prepend("<p>Do you prefer red wine or white wine?</p>");
             $('.wine-color').show();
-            $('.wine-color').click( function(e) {
+            $('.wine-color').on('click', function(e) {
                 e.preventDefault();
                 wineColor = $('input[name=wineColor]:checked').val();
-
-                BlendPreference.addPreference(wineColor);
-
                 $('.wine-color').hide();
+
+                //BlendPreference.addPreference(wineColor);
+
             }); // end get wine color preference
 
             // get wine flavor preference
             $('.wine-flavor').prepend("<p>And do you like your " + wineColor + " wine sweet or dry?</p>");
             $('.wine-flavor').show();
-            $('.wine-flavor').click( function(e) {
+            $('.wine-flavor').on('click', function(e) {
                 e.preventDefault();
                 wineFlavor = $('input[name=wineFlavor]:checked').val();
-
-                BlendPreference.addPreference(wineFlavor);
-
                 $('.wine-flavor').hide();
+
+                //BlendPreference.addPreference(wineFlavor);
+
             }); // end get wine flavor preference
 
             // get wine weight - heavy or light - preference
             $('.wine-weight').prepend("<p>Do you like a full-bodied " + wineFlavor + " " + wineColor + " " + " wine or a lighter blend?</p>");
             $('.wine-weight').show();
-            $('.wine-weight').click( function(e) {
+            $('.wine-weight').on('click', function(e) {
                 e.preventDefault();
                 wineWeight = $('input[name=wineWeight]:checked').val();
-
-                BlendPreference.addPreference(wineWeight);
-
                 $('.wine-weight').hide();
-            });  // end get wine weight preference
 
-            // bartender has to make a wine blend
-            var barkeep = new Barkeep('Lynne', 'makeWineBlend');
+                //BlendPreference.addPreference(wineWeight);
 
-            // get new wine blend name and mix
-            wineName = barkeep.newBlend(BlendPreference);
+                BlendPreference.addPreference(wineColor, wineFlavor, wineWeight);
 
-            // clear input text and radio values
-            $('input[name=wineName]').val('');
-            $('input[name=wineColor]').prop('checked', false);
-            $('input[name=wineFlavor]').prop('checked', false);
-            $('input[name=wineWeight]').prop('checked', false);
-            $('input[name=restock]').prop('checked', false);
+                // bartender has to make a wine blend
+                var barkeep = new Barkeep('Lynne', 'makeWineBlend');
 
-            // deliver new wine blend
-            $('.deliver-blend').show();
-            $('.deliver-blend').prepend("<p><br>" + barkeep.name + " created " + wineName + " blend for you!</p>");
+                // get new wine blend name and mix
+                wineName = barkeep.newBlend(BlendPreference);
 
-          }; // end role of customer
+                // deliver new wine blend
+                $('.deliver-blend').show();
+                $('.deliver-blend').prepend("<p><br>" + barkeep.name + " created " + wineName + " blend for you!</p>");
+          });  // end get wine weight preference
 
-      }); // end identify role
+          } // end role of customer
+
+      }); // end identify user role
 
 });

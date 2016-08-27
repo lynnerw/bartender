@@ -12,7 +12,7 @@
           <h1 style="text-align: center">Welcome to Windswept Winery</h1>
           <h2 style="text-align: center"> ~ Purveyor of fine wine blends ~ </h2>
 
-          <div class="user-role">
+          <div id="userRole">
               <p><br>Excuse me, but are you the barkeep or the customer?</p>
               <input type="radio" name="userRole" id="barkeep" value="serve">
                   <label for="barkeep">Barkeep</label>
@@ -26,31 +26,33 @@
 
           <div id="restock">
               <p>Okay Barkeep; it's time to restock your wine cellar:</p>
-              <label>Enter the type of wine you're restocking: <input class="input-field" type="text" maxlength="15" name="wineName" placeholder="e.g. cabernet"></label>
+              <label>Enter the type of wine you're restocking: <input class="input-field" type="text" maxlength="15" name="grapeName" placeholder="e.g. cabernet"></label>
               <br><label>Now tag it for search later:</label>
 
               <!-- barkeep enters wine attributes -->
               <div class="grape-color">
-                  <input type="radio" name="wineColor" id="red" value="red">
+                  <input type="radio" name="grapeColor" id="red" value="red">
                       <label for="red">red</label>
-                  <input type="radio" name="wineColor" d="white" value="white">
+                  <input type="radio" name="grapeColor" d="white" value="white">
                       <label for="white">white</label>
               </div>
 
               <div class="grape-flavor">
-                  <input type="radio" name="wineFlavor" id="sweet" value="sweet">
+                  <input type="radio" name="grapeFlavor" id="sweet" value="sweet">
                       <label for="sweet">sweet</label>
-                  <input type="radio" name="wineFlavor" id="dry" value="dry">
+                  <input type="radio" name="grapeFlavor" id="dry" value="dry">
                       <label for="dry">dry</label>
               </div>
 
               <div class="grape-weight">
-                  <input type="radio" name="wineWeight" id="full" value="full-bodied">
+                  <input type="radio" name="grapeWeight" id="full" value="full-bodied">
                       <label for="full">complex and full-bodied</label>
-                  <input type="radio" name="wineWeight" id="light" value="light">
+                  <input type="radio" name="grapeWeight" id="light" value="light">
                       <label for="light">light and crisp</lable>
               </div>
+
               <input class="button" type="submit" value="Add bottle to cellar">
+
               <div id="restock-done">
                   <input type="checkbox" name="restock" id="restock" value="done">
                       <label>Done restocking?</label><br>
@@ -61,34 +63,37 @@
       </div> <!-- end id="barkeepRole" -->
 
       <!-- user role is customer -->
-      <div id="customerRole">
-          <p>Blending grape varieties to balance multiple flavors and aromas is done in the Bordeaux and Rhône regions of France, so why not here?
-          <br><br>To mix the perfect blend for you, we'd like know a little about your wine preferences.<br></p>
 
+          <div id="customerIntro">
+              <p>Blending grape varieties to balance multiple flavors and aromas is done in the Bordeaux and Rhône regions of France, so why not here?
+              <br><br>To mix the perfect blend for you, we'd like know a little about your wine preferences.<br></p>
+          </div>
           <!-- get customer's wine preferences -->
-          <div class="wine-color">
-            <input type="radio" name="wineColor" id="red" value="red">
-                <label for="red">red</label>
-            <input type="radio" name="wineColor" d="white" value="white">
-                <label for="white">white</label>
-          </div>
 
-          <div class="wine-flavor">
-            <input type="radio" name="wineFlavor" id="sweet" value="sweet">
-                <label for="sweet">sweet</label>
-            <input type="radio" name="wineFlavor" id="dry" value="dry">
-                <label for="dry">dry</label>
-          </div>
+              <div class="wine-color">
+                <input type="radio" name="wineColor" id="red" value="red">
+                    <label for="red">red</label>
+                <input type="radio" name="wineColor" d="white" value="white">
+                    <label for="white">white</label>
+              </div>
 
-          <div class="wine-weight">
-            <input type="radio" name="wineWeight" id="full" value="full-bodied">
-                <label for="full">complex and full-bodied</label>
-            <input type="radio" name="wineWeight" id="light" value="light">
-                <label for="light">light and crisp</lable>
-          </div>
+              <div class="wine-flavor">
+                <input type="radio" name="wineFlavor" id="sweet" value="sweet">
+                    <label for="sweet">sweet</label>
+                <input type="radio" name="wineFlavor" id="dry" value="dry">
+                    <label for="dry">dry</label>
+              </div>
+
+              <div class="wine-weight">
+                <input type="radio" name="wineWeight" id="full" value="full-bodied">
+                    <label for="full">complex and full-bodied</label>
+                <input type="radio" name="wineWeight" id="light" value="light">
+                    <label for="light">light and crisp</lable>
+              </div>
 
           <div class="deliver-blend"></div>
-      </div> <!-- end id="customerRole" -->
+
+
 
       <!-- load js after html -->
       <script src="https://code.jquery.com/jquery-latest.min.js"></script>
