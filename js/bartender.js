@@ -37,10 +37,10 @@ Inventory.prototype.stockWine = function(grapeName, grapeColor, grapeFlavor, gra
 };
 
 // generate random number to return one of the wines in the cellar
-function getRandomWine(inventory) {
-  var bottlesStocked = inventory.cellar.length;
+function getRandomWine(currentInventory) {
+  var bottlesStocked = currentInventory.cellar.length;
   var randomIndex = Math.floor(Math.random() * bottlesStocked);
-  return inventory.cellar[randomIndex];
+  return currentInventory.cellar[randomIndex].type;
 }
 
 // constructor function for barkeep name and wineblend name
@@ -54,29 +54,29 @@ Barkeep.prototype.newBlend = function(customerPreferences)  {
   if (customerSelection.includes('red')) {
     if (customerSelection.includes('sweet')) {
       if (customerSelection.includes('full-bodied')) {
-        return 'Six of One';
+        return '"Six of One"';
         } else {  // selection is red, sweet, and light
-          return 'Sangria Anyone?';
+          return '"Sangria Anyone?"';
           }
       } else {  // selection includes dry
         if (customerSelection.includes('full-bodied')) {
-          return 'Sinful Zinfandel';
+          return '"Sinful Zinfandel"';
           } else {  //selection is red, dry, and light
-            return 'A Light Finish';
+            return '"A Light Finish"';
             }
         }
     } else {  // selection includes white
       if (customerSelection.includes('sweet')) {
         if (customerSelection.includes('full-bodied')) {
-          return 'A Softer Sancerne';
+          return '"A Softer Shade of Sauternes"';
           } else {  // selection is white, sweet, and light
-            return 'Memories of Reisling';
+            return '"Memories of Reisling"';
             }
         } else {  // selection is white and dry
           if (customerSelection.includes('light')) {
-            return 'A Petite Pinot Gris';
+            return '"Petite Pinot Gris"';
             } else {  //selection is white, dry, and light
-              return 'Bite Your Tongue';
+              return '"Bite Your Tongue" crisp, dry';
               }
           }
       }
@@ -85,6 +85,8 @@ Barkeep.prototype.newBlend = function(customerPreferences)  {
 $(document).ready(function() {
 
   $('#barkeepRole').hide();
+  $('#shift-over').hide();
+
   $('#customerIntro').hide();
   $('.wine-color').hide();
   $('.wine-flavor').hide();
@@ -115,12 +117,11 @@ $(document).ready(function() {
 
         }); // end add bottle of wine to cellar
 
-        $('#restock').click( function(e) {
-          e.preventDefault();
-
-          $('#restock-done').append('<p>Well done. You get a bottle of ' + getRandomWine(inventory) + ' for your efforts. Please wait until after your shift to enjoy.')
-          $('#shiftover').show();
-          $('#shiftover').click( function(e) {
+        $('#restock-done').click( function() {
+          var reward = getRandomWine(wineInventory);
+          $('#shift-over').prepend('<p>Well done. You get a bottle of ' + reward + ' for your efforts. Please wait until after your shift to enjoy.</p>')
+          $('#shift-over').show();
+          $('input[type=submit]').click( function(e) {
             e.preventDefault();
 
             // hide barkeep content, clear user role, clear radio buttons and checkbox
@@ -131,10 +132,11 @@ $(document).ready(function() {
             $('input[name=grapeFlavor]').prop('checked', false);
             $('input[name=grapeWeight]').prop('checked', false);
             $('input[name=restock]').prop('checked', false);
-          });
 
-          // provide opportunity for another UI role selection
-          $('#userRole').show();
+            // provide opportunity for another UI role selection
+            $('#userRole').show();
+
+          });
 
         });   //end restock-done
 
@@ -180,7 +182,7 @@ $(document).ready(function() {
 
               // deliver new wine blend
               $('.deliver-blend').show();
-              $('.deliver-blend').prepend("<p><br>" + barkeep.name + " created " + wineName + " blend for you!</p>");
+              $('.deliver-blend').prepend("<p><br>" + barkeep.name + " created a " + wineName + " blend for you!</p>");
 
             });  // end get wine weight preference
           }); // end get wine flavor preference
