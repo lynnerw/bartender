@@ -84,13 +84,16 @@ Barkeep.prototype.newBlend = function(customerPreferences)  {
 
 $(document).ready(function() {
 
+  // hide barkeep-specific UI elements
   $('#barkeepRole').hide();
-  $('#shift-over').hide();
-
+  $('.shift-over').hide();
+  // hide customer-specific UI elements
   $('#customerIntro').hide();
   $('.wine-color').hide();
   $('.wine-flavor').hide();
   $('.wine-weight').hide();
+  $('.deliver-blend').hide();
+  $('.reset').hide();
 
   // check user role
   $('#userRole').on('click', function(e) {
@@ -104,6 +107,7 @@ $(document).ready(function() {
         var wineInventory = new Inventory();
 
         $('#barkeepRole').show();
+        $('#restock-done').show();
 
         $('input[type=submit]').click( function(e) {
           e.preventDefault();
@@ -119,28 +123,24 @@ $(document).ready(function() {
 
         $('#restock-done').click( function() {
           var reward = getRandomWine(wineInventory);
-          $('#shift-over').prepend('<p>Well done. You get a bottle of ' + reward + ' for your efforts. Please wait until after your shift to enjoy.</p>')
-          $('#shift-over').show();
+          $('.shift-over').prepend('<p>Well done. You get a bottle of ' + reward + ' for your efforts. Please wait until <b>after</b> you finish your shift before you open it.</p>')
+          $('.shift-over').show();
           $('input[type=submit]').click( function(e) {
             e.preventDefault();
 
-            // hide barkeep content, clear user role, clear radio buttons and checkbox
-            $('#barkeepRole').hide();
-            role = '';
+            // lear radio buttons and checkbox
             $('input[name=grapeName]').val('');
             $('input[name=grapeColor]').prop('checked', false);
             $('input[name=grapeFlavor]').prop('checked', false);
             $('input[name=grapeWeight]').prop('checked', false);
             $('input[name=restock]').prop('checked', false);
+            document.location.reload(true);
 
-            // provide opportunity for another UI role selection
-            $('#userRole').show();
+          });  //end display reward message and "shift over" button
 
-          });
+        });  //end restock-done
 
-        });   //end restock-done
-
-      } else {     // end role = barkeep
+      } else {
 
         // role = customer; get wine preferences
         $('#customerIntro').show();
@@ -171,7 +171,7 @@ $(document).ready(function() {
               wineWeight = $('input[name=wineWeight]:checked').val();
               $('.wine-weight').hide();
 
-              // biold customer preferences object
+              // customer preferences object
               BlendPreference.addPreference(wineColor, wineFlavor, wineWeight);
 
               // new instance of this obj
@@ -180,16 +180,25 @@ $(document).ready(function() {
               // get new wine blend name and mix
               wineName = barkeep.newBlend(BlendPreference);
 
-              // deliver new wine blend
+              // deliver new wine blend and display ciao button
               $('.deliver-blend').show();
               $('.deliver-blend').prepend("<p><br>" + barkeep.name + " created a " + wineName + " blend for you!</p>");
+              $('.reset').show();
+
+              // refresh page onclick
+              $('input[type=submit]').click( function(e) {
+                e.preventDefault();
+                document.location.reload(true);
+              });  // end deliver new wine blend and display ciao button
 
             });  // end get wine weight preference
-          }); // end get wine flavor preference
-        }); // end get wine color preference
 
-      } // end role of customer
+          });  // end get wine flavor preference
 
-  }); // end check for user role
+        });  // end get wine color preference
+
+      }  // end role of customer
+
+  });  // end check for user role
 
 });

@@ -59,46 +59,49 @@
                       <label for="restock">Done restocking?</label><br>
               </div>
 
-              <div id="shift-over">
-                <input class="button" type="submit" value="Shift over!">
+              <!-- if done, display message and button -->
+              <div class="shift-over">
+                <input class="button" type="submit" value="My shift is over!">
               </div>
 
           </div>
 
       </div> <!-- end id="barkeepRole" -->
 
-      <!-- user role is customer -->
+      <!-- begin user role is customer -->
 
-          <div id="customerIntro">
-              <p>Blending grape varieties to balance multiple flavors and aromas is done in the Bordeaux and Rhône regions of France, so why not here?
-              <br><br>To mix the perfect blend for you, we'd like know a little about your wine preferences.<br></p>
-          </div>
-          <!-- get customer's wine preferences -->
+      <div id="customerIntro">
+          <p><br>Blending grape varieties to balance multiple flavors and aromas is done in the Bordeaux and Rhône regions of France, so why not here?
+          <br><br>To mix the perfect blend for you, we'd like know a little about your wine preferences.<br></p>
+      </div>
+      <!-- get customer's wine preferences -->
 
-              <div class="wine-color">
-                <input type="radio" name="wineColor" id="red" value="red">
-                    <label for="red">red</label>
-                <input type="radio" name="wineColor" d="white" value="white">
-                    <label for="white">white</label>
-              </div>
+      <div class="wine-color">
+        <input type="radio" name="wineColor" id="red" value="red">
+            <label for="red">red</label>
+        <input type="radio" name="wineColor" d="white" value="white">
+            <label for="white">white</label>
+      </div>
 
-              <div class="wine-flavor">
-                <input type="radio" name="wineFlavor" id="sweet" value="sweet">
-                    <label for="sweet">sweet</label>
-                <input type="radio" name="wineFlavor" id="dry" value="dry">
-                    <label for="dry">dry</label>
-              </div>
+      <div class="wine-flavor">
+        <input type="radio" name="wineFlavor" id="sweet" value="sweet">
+            <label for="sweet">sweet</label>
+        <input type="radio" name="wineFlavor" id="dry" value="dry">
+            <label for="dry">dry</label>
+      </div>
 
-              <div class="wine-weight">
-                <input type="radio" name="wineWeight" id="full" value="full-bodied">
-                    <label for="full">complex and full-bodied</label>
-                <input type="radio" name="wineWeight" id="light" value="light">
-                    <label for="light">light and crisp</lable>
-              </div>
+      <div class="wine-weight">
+        <input type="radio" name="wineWeight" id="full" value="full-bodied">
+            <label for="full">complex and full-bodied</label>
+        <input type="radio" name="wineWeight" id="light" value="light">
+            <label for="light">light and crisp</lable>
+      </div>
 
-          <div class="deliver-blend"></div>
-
-
+      <div class="deliver-blend">
+        <div class="reset">
+          <input class="button" type="submit" value="Ciao!">
+        </div>
+      </div>
 
       <!-- load js after html -->
       <script src="https://code.jquery.com/jquery-latest.min.js"></script>
