@@ -107,7 +107,7 @@ $(document).ready(function() {
         var wineInventory = new Inventory();
 
         $('#barkeepRole').show();
-        $('#restock-done').show();
+        $('.restock-done').show();
 
         $('input[type=submit]').click( function(e) {
           e.preventDefault();
@@ -121,7 +121,7 @@ $(document).ready(function() {
 
         }); // end add bottle of wine to cellar
 
-        $('#restock-done').click( function() {
+        $('.restock-done').click( function() {
           var reward = getRandomWine(wineInventory);
           $('.shift-over').prepend('<p>Well done. You get a bottle of ' + reward + ' for your efforts. Please wait until <b>after</b> you finish your shift before you open it.</p>')
           $('.shift-over').show();
