@@ -9,18 +9,6 @@ html, body {
 body {
 }
 
-/** reset **/
-html, body, body div, span, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, abbr, address, cite, code, del, dfn, em, img, ins, kbd, q, samp, small, strong, sub, sup, var, b, i, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, figure, footer, header, hgroup, menu, nav, section, time, mark, audio, video, a {
-    margin: 0;
-    padding: 0;
-    border: 0;
-    outline: 0;
-    font-size: 100%;
-    vertical-align: baseline;
-    background: transparent;
-    font-weight: inherit;
-}
-
 @
 html {
     position: relative;
@@ -32,18 +20,16 @@ body {
     font-style: normal;
     font-size: 18px;
     text-rendering: optimizeLegibility;
-    color: #333;
+    color: #222;
     background-color: #fff;
     height: 100%;
 }
 
 body {
-    margin: 0.25 auto;
-		max-width: 40em;
-		padding: 1em;
     font-size: 1.2em;
-		font-weight: bold;
-    line-height: 1.4;
+    margin: 0.5 auto;
+		max-width: 60%;
+		padding: 1em;
 }
 
 h1,
@@ -54,13 +40,34 @@ h3 {
 }
 
 h1 {
-		margin: 0 0 6px;
     font-size: 2.5em;
+    line-height: 2em;
+		margin: 1px 6px;
 }
 
-/* get answer to question */
-.customer-interview {
-
-    padding: 1em;
-    color: #222;
+h2 {
+    font-size: 1.5em;
+    line-height: 1em;
+    margin: 2px auto;
 }
+
+/*#restock {
+    font-size: 1em;
+    line-height: 1.3em;
+    margin: 5px 0 0 0;
+    padding: .5em;
+}*/
+
+.input-field {
+    font-family: inherit;
+    font-size: 1em;
+    line-height: 1.5;
+    border-width: 2px;
+}
+
+.button {
+    font-family: inherit;
+    font-size: 1em;
+    border-width: 5px;
+    margin: 15px 0 10 0;
+}}

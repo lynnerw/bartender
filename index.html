@@ -1,39 +1,112 @@
 <!DOCTYPE>
 <html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Bartender</title>
-<link rel="stylesheet" href="css/styles.css">
-</head>
-<body>
-    <h1>Welcome to Windswept Winery</h1>
-    <p>To better serve you, we'd like know a little about your wine preferences.<br><br></p>
-<!--<div class=simpleAns>
-        <input type="radio" name="trueFalse" value="true"> Sure! Let's get started!
-        <input type="radio" name="trueFalse" value="false"> Not on your life. I'm outta here.
-    </div> -->
+  <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <title>Barkeep Extraordinaire</title>
+      <link rel="stylesheet" href="css/styles.css">
+  </head>
 
-    <!-- get wine preference input from customer -->
-    <div class="wine-color">
-        <input type="radio" name="wineColor" value="red"> red
-        <input type="radio" name="wineColor" value="white"> white
-    </div>
+  <body>
+      <header>
+          <h1 style="text-align: center">Welcome to Windswept Winery</h1>
+          <h2 style="text-align: center"> ~ Purveyor of fine wine blends ~ </h2>
 
-    <div class="wine-flavor">
-        <input type="radio" name="wineFlavor" value="sweet"> sweet
-        <input type="radio" name="wineFlavor" value="dry"> dry
-    </div>
+          <div id="userRole">
+              <p><br>Excuse me, but are you the barkeep or the customer?</p>
+              <input type="radio" name="userRole" id="barkeep" value="serve">
+                  <label for="barkeep">Barkeep</label>
+              <input type="radio" name="userRole" id="customer" value="sip">
+                  <label for="customer">Customer</label>
+          </div>
+      </header>
 
-    <div class="wine-weight">
-        <input type="radio" name="wineWeight" value="full-bodied"> complex and full-bodied
-        <input type="radio" name="wineWeight" value="light"> light and crisp
-    </div>
+      <!-- user role is barkeep -->
+      <div id="barkeepRole">
 
-    <div class="deliver-blend"></div>
-    
-  <script src="https://code.jquery.com/jquery-latest.min.js"></script>
-  <script src="js/bartender.js"></script>
+          <div id="restock">
+              <p>Okay Barkeep; it's time to restock your wine cellar:</p>
+              <label>Enter the type of wine you're restocking: <input class="input-field" type="text" maxlength="15" name="grapeName" placeholder="e.g. cabernet"></label>
+              <br><label>Now tag it for search later:</label>
 
-</body>
+              <!-- barkeep enters wine attributes -->
+              <div class="grape-color">
+                  <input type="radio" name="grapeColor" id="red" value="red">
+                      <label for="red">red</label>
+                  <input type="radio" name="grapeColor" d="white" value="white">
+                      <label for="white">white</label>
+              </div>
+
+              <div class="grape-flavor">
+                  <input type="radio" name="grapeFlavor" id="sweet" value="sweet">
+                      <label for="sweet">sweet</label>
+                  <input type="radio" name="grapeFlavor" id="dry" value="dry">
+                      <label for="dry">dry</label>
+              </div>
+
+              <div class="grape-weight">
+                  <input type="radio" name="grapeWeight" id="full" value="full-bodied">
+                      <label for="full">complex and full-bodied</label>
+                  <input type="radio" name="grapeWeight" id="light" value="light">
+                      <label for="light">light and crisp</lable>
+              </div>
+
+              <!-- after tagging wine entry, add to cellar inventory -->
+              <input class="button" type="submit" value="Add bottle to cellar">
+
+              <div id="restock-done">
+                  <input type="checkbox" name="restock" id="restock" value="done">
+                      <label for="restock">Done restocking?</label><br>
+              </div>
+
+              <!-- if done, display message and button -->
+              <div class="shift-over">
+                <input class="button" type="submit" value="My shift is over!">
+              </div>
+
+          </div>
+
+      </div> <!-- end id="barkeepRole" -->
+
+      <!-- begin user role is customer -->
+
+      <div id="customerIntro">
+          <p><br>Blending grape varieties to balance multiple flavors and aromas is done in the Bordeaux and Rhône regions of France, so why not here?
+          <br><br>To mix the perfect blend for you, we'd like know a little about your wine preferences.<br></p>
+      </div>
+      <!-- get customer's wine preferences -->
+
+      <div class="wine-color">
+        <input type="radio" name="wineColor" id="red" value="red">
+            <label for="red">red</label>
+        <input type="radio" name="wineColor" d="white" value="white">
+            <label for="white">white</label>
+      </div>
+
+      <div class="wine-flavor">
+        <input type="radio" name="wineFlavor" id="sweet" value="sweet">
+            <label for="sweet">sweet</label>
+        <input type="radio" name="wineFlavor" id="dry" value="dry">
+            <label for="dry">dry</label>
+      </div>
+
+      <div class="wine-weight">
+        <input type="radio" name="wineWeight" id="full" value="full-bodied">
+            <label for="full">complex and full-bodied</label>
+        <input type="radio" name="wineWeight" id="light" value="light">
+            <label for="light">light and crisp</lable>
+      </div>
+
+      <div class="deliver-blend">
+        <div class="reset">
+          <input class="button" type="submit" value="Ciao!">
+        </div>
+      </div>
+
+      <!-- load js after html -->
+      <script src="https://code.jquery.com/jquery-latest.min.js"></script>
+      <script src="js/bartender.js"></script>
+
+  </body>
+
 </html>
