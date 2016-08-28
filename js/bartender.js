@@ -18,8 +18,8 @@ var CustPreferences = function(preferences) {
   this.preferences = preferences;
 };
 
-CustPreferences.prototype.addPreference = function(wineColor, wineFlavor, wineWeight) {
-  this.preferences.push(wineColor, wineFlavor, wineWeight)
+CustPreferences.prototype.addPreference = function(customerPref) {
+  this.preferences.push(customerPref)
 };
 
 // adding to inventory and tagging it
@@ -111,11 +111,14 @@ $(document).ready(function() {
 
         $('input[type=submit]').click( function(e) {
           e.preventDefault();
-          wineInventory.stockWine($('input[name=grapeName]').val());
+          wineInventory.stockWine(
+            ($('input[name=grapeName]').val()),
+            ($('input[name=grapeColor]:checked').val()),
+            ($('input[name=grapeFlavor]:checked').val()),
+            ($('input[name=grapeWeight]:checked').val()));
+
           $('input[name=grapeName]').val('');
-          wineInventory.stockWine($('input[name=grapeColor]:checked').val());
-          wineInventory.stockWine($('input[name=grapeFlavor]:checked').val());
-          wineInventory.stockWine($('input[name=grapeWeight]:checked').val());
+
 
           //wineInventory.stockWine(grapeName, grapeColor, grapeFlavor, grapeWeight);
 
