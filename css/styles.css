@@ -60,3 +60,8 @@ h2 {
     border-width: 5px;
     margin: 15px 0 10 0;
 }
+
+#barkeepRole,
+#customerIntro {
+  display: none;
+}
