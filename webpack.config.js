@@ -7,7 +7,7 @@ var packageData = require('./package.json');
 var filename = [packageData.name, packageData.version, 'js'];
 
 module.exports = {
-    entry: path.resolve(__dirname, packageData.main),
+    entry: ('js/bartenderStock.js'),
     output: {
         path: path.resolve(__dirname, 'build'),
         filename: filename.join('.'),

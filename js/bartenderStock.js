@@ -31,6 +31,8 @@ function getRandomWine(currentInventory) {
 
 $(document).ready(function() {
 
+  require('./bartenderServe.js');
+
   // hide barkeep-specific UI elements
   $('#barkeepRole').hide();
   // hide customer-specific UI elements

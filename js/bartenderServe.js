@@ -1,6 +1,7 @@
 
 // call this file from bartender.js if user role is "sip"
 
+
 // collecting a customer's preferences
 var CustPreferences = function(preferences) {
   this.preferences = preferences;
