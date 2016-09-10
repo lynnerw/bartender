@@ -42,7 +42,7 @@ $(document).ready(function() {
       role = $('input[name=userRole]:checked').val();
       $('#userRole').hide();
 
-      if (role === 'serve') {
+      if (role === 'stock') {
 
         // role = barkeep; stock the wine cellar
         var wineInventory = new Inventory();
@@ -82,7 +82,8 @@ $(document).ready(function() {
 
       } else {
 
-        
+          serveWineBlend();
+
       }  // end role of customer
 
   });  // end check for user role

@@ -1,0 +1,34 @@
+{
+  "name": "bartender",
+  "version": "1.0.0",
+  "description": "Thinkful OOP exercise",
+  "main": "js/index.js",
+  "scripts": {
+    "mkdir": "mkdir -p build",
+    "build": "npm run clean && npm run mkdir && npm run build:html && npm run build:js",
+    "watch": "npm run watch:html & npm run watch:js",
+    "clean": "rm -rf build",
+    "build:html": "npm run clean:html && cp index.html build/",
+    "watch:html": "npm run build:html && chokidar index.html -c 'npm run build:html'",
+    "clean:html": "rm -f build/index.html",
+    "build:js": "npm run clean:js && webpack",
+    "watch:js": "npm run build:js && webpack --watch",
+    "clean:js": "rm -f build/$npm_package_name.$npm_package_version.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lynnerw/bartender.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lynnerw/bartender/issues"
+  },
+  "homepage": "https://github.com/lynnerw/bartender#readme",
+  "dependencies": {
+    "jquery": "^3.1.0"
+  },
+  "devDependencies": {
+    "webpack": "^1.13.2"
+  }
+}

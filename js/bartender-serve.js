@@ -49,82 +49,64 @@ Barkeep.prototype.newBlend = function(customerPreferences)  {
       }
 };
 
-/*$(document).ready(function() {
+function serveWineBlend() {
 
-  // hide barkeep-specific UI elements
-  $('#barkeepRole').hide();
-  // hide customer-specific UI elements
-  $('#customerRole').hide();
+  // role = customer; get wine preferences
+  $('#customerRole').show();
+  $('.wine-color').hide();
+  $('.wine-flavor').hide();
+  $('.wine-weight').hide();
+  $('.deliver-blend').hide();
+  $('.reset').hide();
 
-  // check user role
-  $('#userRole').on('click', function(e) {
+  var BlendPreference = new CustPreferences([]);
+
+  // get wine color preference
+  $('.wine-color').prepend("<p>Do you prefer red wine or white wine?</p>");
+  $('.wine-color').show();
+  $('.wine-color').on('click', function(e) {
+    e.preventDefault();
+    BlendPreference.addPreference($('input[name=wineColor]:checked').val());
+    $('.wine-color').hide();
+
+    // get wine flavor preference
+    $('.wine-flavor').prepend("<p>And do you like your wine sweet or dry?</p>");
+    $('.wine-flavor').show();
+    $('.wine-flavor').on('click', function(e) {
       e.preventDefault();
-      role = $('input[name=userRole]:checked').val();
-      $('#userRole').hide();
-*/
+      BlendPreference.addPreference($('input[name=wineFlavor]:checked').val());
+      $('.wine-flavor').hide();
 
-// get user role
-
-//userRole = function(role);
-
-      if (role === 'sip') {
-
-        // role = customer; get wine preferences
-        $('#customerRole').show();
-        $('.wine-color').hide();
-        $('.wine-flavor').hide();
+      // get wine weight - heavy or light - preference
+      $('.wine-weight').prepend("<p>Do you like a full-bodied wine or a lighter blend?</p>");
+      $('.wine-weight').show();
+      $('.wine-weight').on('click', function(e) {
+        e.preventDefault();
+        BlendPreference.addPreference($('input[name=wineWeight]:checked').val());
         $('.wine-weight').hide();
-        $('.deliver-blend').hide();
-        $('.reset').hide();
 
-        var BlendPreference = new CustPreferences([]);
+        // new instance of this obj
+        var barkeep = new Barkeep('Lynne');
 
-        // get wine color preference
-        $('.wine-color').prepend("<p>Do you prefer red wine or white wine?</p>");
-        $('.wine-color').show();
-        $('.wine-color').on('click', function(e) {
+        // get new wine blend name and mix
+        wineName = barkeep.newBlend(BlendPreference);
+
+        // deliver new wine blend and display ciao button
+        $('.deliver-blend').show();
+        $('.deliver-blend').prepend("<p><br>" + barkeep.name + " created a " + wineName + " blend for you!</p>");
+        $('.reset').show();
+
+        // refresh page onclick
+        $('input[type=submit]').click( function(e) {
           e.preventDefault();
-          BlendPreference.addPreference($('input[name=wineColor]:checked').val());
-          $('.wine-color').hide();
+          document.location.reload(true);
 
-          // get wine flavor preference
-          $('.wine-flavor').prepend("<p>And do you like your wine sweet or dry?</p>");
-          $('.wine-flavor').show();
-          $('.wine-flavor').on('click', function(e) {
-            e.preventDefault();
-            BlendPreference.addPreference($('input[name=wineFlavor]:checked').val());
-            $('.wine-flavor').hide();
+        });  // end deliver new wine blend and display ciao button
 
-            // get wine weight - heavy or light - preference
-            $('.wine-weight').prepend("<p>Do you like a full-bodied wine or a lighter blend?</p>");
-            $('.wine-weight').show();
-            $('.wine-weight').on('click', function(e) {
-              e.preventDefault();
-              BlendPreference.addPreference($('input[name=wineWeight]:checked').val());
-              $('.wine-weight').hide();
+      });  // end get wine weight preference
 
-              // new instance of this obj
-              var barkeep = new Barkeep('Lynne');
+    });  // end get wine flavor preference
 
-              // get new wine blend name and mix
-              wineName = barkeep.newBlend(BlendPreference);
+  });  // end get wine color preference
 
-              // deliver new wine blend and display ciao button
-              $('.deliver-blend').show();
-              $('.deliver-blend').prepend("<p><br>" + barkeep.name + " created a " + wineName + " blend for you!</p>");
-              $('.reset').show();
-
-              // refresh page onclick
-              $('input[type=submit]').click( function(e) {
-                e.preventDefault();
-                document.location.reload(true);
-
-              });  // end deliver new wine blend and display ciao button
-
-            });  // end get wine weight preference
-
-          });  // end get wine flavor preference
-
-        });  // end get wine color preference
-
-  };  // end check for user role
+};  // end check for user role
