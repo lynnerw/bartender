@@ -1,3 +1,5 @@
+var $ = require('../node_modules/jquery/src/jquery');
+var serveWine = require('./bartenderServe');
 
 // user role to display correct UI
 var role = '';
@@ -30,8 +32,6 @@ function getRandomWine(currentInventory) {
 }
 
 $(document).ready(function() {
-
-  require('./bartenderServe.js');
 
   // hide barkeep-specific UI elements
   $('#barkeepRole').hide();
@@ -84,7 +84,7 @@ $(document).ready(function() {
 
       } else {
 
-          serveWineBlend();
+          serveWine();
 
       }  // end role of customer
 

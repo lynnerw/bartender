@@ -1,7 +1,4 @@
 
-// call this file from bartender.js if user role is "sip"
-
-
 // collecting a customer's preferences
 var CustPreferences = function(preferences) {
   this.preferences = preferences;
@@ -111,3 +108,5 @@ function serveWineBlend() {
   });  // end get wine color preference
 
 };  // end check for user role
+
+module.exports = serveWineBlend;
