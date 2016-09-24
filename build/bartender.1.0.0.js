@@ -52,12 +52,6 @@
 	// user role to display correct UI
 	var role = '';
 	
-	// variables for barkeep wine cellar input
-	var grapeName = '';
-	var grapeColor = '';
-	var grapeFlavor = '';
-	var grapeWeight = '';
-	
 	// adding to inventory and tagging it
 	var Inventory = function Inventory() {
 	  this.cellar = [];
@@ -11608,11 +11602,11 @@
 	        var barkeep = new Barkeep('Lynne');
 	
 	        // get new wine blend name and mix
-	        wineName = barkeep.newBlend(BlendPreference);
+	        // wineName = barkeep.newBlend(BlendPreference);
 	
 	        // deliver new wine blend and display ciao button
 	        $('.deliver-blend').show();
-	        $('.deliver-blend').prepend("<p><br>" + barkeep.name + " created a " + wineName + " blend for you!</p>");
+	        $('.deliver-blend').prepend("<p><br>" + barkeep.name + " created a " + barkeep.newBlend(BlendPreference) + " blend for you!</p>");
 	        $('.reset').show();
 	
 	        // refresh page onclick

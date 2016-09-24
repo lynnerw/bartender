@@ -4,12 +4,6 @@ var serveWine = require('./bartenderServe');
 // user role to display correct UI
 var role = '';
 
-// variables for barkeep wine cellar input
-var grapeName = '';
-var grapeColor = '';
-var grapeFlavor = '';
-var grapeWeight = '';
-
 // adding to inventory and tagging it
 var Inventory = function() {
   this.cellar = [];
