@@ -1,51 +1,54 @@
+"use strict";
 
-// collecting a customer's preferences
-var CustPreferences = function(preferences) {
-  this.preferences = preferences;
-};
+class CustPreferences {
 
-CustPreferences.prototype.addPreference = function(customerPref) {
-  this.preferences.push(customerPref);
-};
+  constructor(preferences) {
+    this.preferences = preferences;
+  }
+  addPreference(customerPref) {
+    this.preferences.push(customerPref);
+  }
+}
 
-// constructor function for server's name
-var Barkeep = function(personName) {
-  this.name = personName;
-};
+class Barkeep {
 
-// object method is logic to create and name a drink based on selections
-Barkeep.prototype.newBlend = function(customerPreferences)  {
-  var customerSelection = customerPreferences.preferences;
-  if (customerSelection.includes('red')) {
-    if (customerSelection.includes('sweet')) {
-      if (customerSelection.includes('full-bodied')) {
-        return '"Six of One"';
-        } else {  // selection is red, sweet, and light
-          return '"Sangria Anyone?"';
-          }
-      } else {  // selection includes dry
-        if (customerSelection.includes('full-bodied')) {
-          return '"Sinful Zinfandel"';
-          } else {  //selection is red, dry, and light
-            return '"A Light Finish"';
+  constructor(personName) {
+    this.name = personName;
+  }
+  newBlend(customerPreferences) {
+    this.customerSelection = customerPreferences.preferences;
+
+    if (this.customerSelection.includes('red')) {
+      if (this.customerSelection.includes('sweet')) {
+        if (this.customerSelection.includes('full-bodied')) {
+          return '"Six of One"';
+          } else {  // selection is red, sweet, and light
+            return '"Sangria Anyone?"';
             }
-        }
-    } else {  // selection includes white
-      if (customerSelection.includes('sweet')) {
-        if (customerSelection.includes('full-bodied')) {
-          return '"A Softer Shade of Sauternes"';
-          } else {  // selection is white, sweet, and light
-            return '"Memories of Reisling"';
-            }
-        } else {  // selection is white and dry
-          if (customerSelection.includes('light')) {
-            return '"Petite Pinot Gris"';
-            } else {  //selection is white, dry, and light
-              return '"Bite Your Tongue" crisp, dry';
+        } else {  // selection includes dry
+          if (this.customerSelection.includes('full-bodied')) {
+            return '"Sinful Zinfandel"';
+            } else {  //selection is red, dry, and light
+              return '"A Light Finish"';
               }
           }
+      } else {  // selection includes white
+        if (this.customerSelection.includes('sweet')) {
+          if (this.customerSelection.includes('full-bodied')) {
+            return '"A Softer Shade of Sauternes"';
+            } else {  // selection is white, sweet, and light
+              return '"Memories of Reisling"';
+              }
+          } else {  // selection is white and dry
+            if (this.customerSelection.includes('light')) {
+              return '"Petite Pinot Gris"';
+              } else {  //selection is white, dry, and light
+                return '"Bite Your Tongue" crisp, dry';
+                }
+            }
       }
-};
+  }
+}
 
 function serveWineBlend() {
 
@@ -85,9 +88,6 @@ function serveWineBlend() {
 
         // new instance of this obj
         var barkeep = new Barkeep('Lynne');
-
-        // get new wine blend name and mix
-        // wineName = barkeep.newBlend(BlendPreference);
 
         // deliver new wine blend and display ciao button
         $('.deliver-blend').show();

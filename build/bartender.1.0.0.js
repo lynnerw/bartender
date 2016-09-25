@@ -44,81 +44,93 @@
 /* 0 */
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';
+	"use strict";
 	
-	var $ = __webpack_require__(1);
-	var serveWine = __webpack_require__(99);
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 	
-	// user role to display correct UI
-	var role = '';
+	var _jquery = __webpack_require__(1);
 	
-	// adding to inventory and tagging it
-	var Inventory = function Inventory() {
-	  this.cellar = [];
-	};
+	var _jquery2 = _interopRequireDefault(_jquery);
 	
-	Inventory.prototype.stockWine = function (grapeName, grapeColor, grapeFlavor, grapeWeight) {
-	  this.cellar.push({
-	    type: grapeName,
-	    color: grapeColor,
-	    flavor: grapeFlavor,
-	    weight: grapeWeight
-	  });
-	};
+	var _bartenderServe = __webpack_require__(99);
+	
+	var _bartenderServe2 = _interopRequireDefault(_bartenderServe);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	var Inventory = function () {
+	  function Inventory() {
+	    _classCallCheck(this, Inventory);
+	
+	    this.cellar = [];
+	  }
+	
+	  _createClass(Inventory, [{
+	    key: 'stockWine',
+	    value: function stockWine(grapeName, grapeColor, grapeFlavor, grapeWeight) {
+	      this.cellar.push({
+	        type: grapeName,
+	        color: grapeColor,
+	        flavor: grapeFlavor,
+	        weight: grapeWeight
+	      });
+	    }
+	  }]);
+	
+	  return Inventory;
+	}();
 	
 	// generate random number to return one of the wines in the cellar
+	
+	
 	function getRandomWine(currentInventory) {
 	  var bottlesStocked = currentInventory.cellar.length;
 	  var randomIndex = Math.floor(Math.random() * bottlesStocked);
+	
 	  return currentInventory.cellar[randomIndex].type;
 	}
 	
-	$(document).ready(function () {
+	(0, _jquery2.default)(document).ready(function () {
 	
-	  // hide barkeep-specific UI elements
-	  $('#barkeepRole').hide();
-	  // hide customer-specific UI elements
-	  $('#customerRole').hide();
-	
-	  // check user role
-	  $('#userRole').on('click', function (e) {
+	  (0, _jquery2.default)('#userRole').on('click', function (e) {
 	    e.preventDefault();
-	    role = $('input[name=userRole]:checked').val();
-	    $('#userRole').hide();
+	    var role = (0, _jquery2.default)('input[name=userRole]:checked').val();
+	    (0, _jquery2.default)('#userRole').hide();
 	
-	    if (role === 'stock') {
+	    if (role === 'stockWine') {
 	
-	      // role = barkeep; stock the wine cellar
+	      (0, _jquery2.default)('#barkeepRole').show();
+	
 	      var wineInventory = new Inventory();
 	
-	      $('#barkeepRole').show();
-	      $('.shift-over').hide();
-	
-	      $('input[type=submit]').click(function (e) {
+	      (0, _jquery2.default)('input[type=submit]').click(function (e) {
 	        e.preventDefault();
-	        wineInventory.stockWine($('input[name=grapeName]').val(), $('input[name=grapeColor]:checked').val(), $('input[name=grapeFlavor]:checked').val(), $('input[name=grapeWeight]:checked').val());
+	        wineInventory.stockWine((0, _jquery2.default)('input[name=grapeName]').val(), (0, _jquery2.default)('input[name=grapeColor]:checked').val(), (0, _jquery2.default)('input[name=grapeFlavor]:checked').val(), (0, _jquery2.default)('input[name=grapeWeight]:checked').val());
 	
-	        $('input[name=grapeName]').val('');
+	        (0, _jquery2.default)('input[name=grapeName]').val('');
 	      }); // end add bottle of wine to cellar
 	
-	      $('.restock-done').click(function () {
+	      (0, _jquery2.default)('.restock-done').click(function () {
 	        var reward = getRandomWine(wineInventory);
-	        $('.shift-over').prepend('<p>Well done. You get a bottle of ' + reward + ' for your efforts. Please wait until <b>after</b> you finish your shift before you open it.</p>');
-	        $('.shift-over').show();
-	        $('input[type=submit]').click(function (e) {
+	        (0, _jquery2.default)('.shift-over').prepend('<p>Well done. You get a bottle of ' + reward + ' for your efforts. Please wait until <b>after</b> you finish your shift before you open it.</p>');
+	        (0, _jquery2.default)('.shift-over').show();
+	        (0, _jquery2.default)('input[type=submit]').click(function (e) {
 	          e.preventDefault();
 	
-	          // clear radio buttons and checkbox
-	          $('input[name=grapeColor]').prop('checked', false);
-	          $('input[name=grapeFlavor]').prop('checked', false);
-	          $('input[name=grapeWeight]').prop('checked', false);
-	          $('input[name=restock]').prop('checked', false);
+	          // clear role, radio buttons, and checkbox
+	          role = '';
+	          (0, _jquery2.default)('input[name=grapeColor]').prop('checked', false);
+	          (0, _jquery2.default)('input[name=grapeFlavor]').prop('checked', false);
+	          (0, _jquery2.default)('input[name=grapeWeight]').prop('checked', false);
+	          (0, _jquery2.default)('input[name=restock]').prop('checked', false);
 	          document.location.reload(true);
 	        }); // end display reward message and "shift over" button
 	      }); // end restock-done
 	    } else {
 	
-	      serveWine();
+	      (0, _bartenderServe2.default)();
 	    } // end role of customer
 	  }); // end check for user role
 	});
@@ -11505,62 +11517,82 @@
 /* 99 */
 /***/ function(module, exports) {
 
-	'use strict';
+	"use strict";
 	
-	// collecting a customer's preferences
-	var CustPreferences = function CustPreferences(preferences) {
-	  this.preferences = preferences;
-	};
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 	
-	CustPreferences.prototype.addPreference = function (customerPref) {
-	  this.preferences.push(customerPref);
-	};
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 	
-	// constructor function for server's name
-	var Barkeep = function Barkeep(personName) {
-	  this.name = personName;
-	};
+	var CustPreferences = function () {
+	  function CustPreferences(preferences) {
+	    _classCallCheck(this, CustPreferences);
 	
-	// object method is logic to create and name a drink based on selections
-	Barkeep.prototype.newBlend = function (customerPreferences) {
-	  var customerSelection = customerPreferences.preferences;
-	  if (customerSelection.includes('red')) {
-	    if (customerSelection.includes('sweet')) {
-	      if (customerSelection.includes('full-bodied')) {
-	        return '"Six of One"';
-	      } else {
-	        // selection is red, sweet, and light
-	        return '"Sangria Anyone?"';
-	      }
-	    } else {
-	      // selection includes dry
-	      if (customerSelection.includes('full-bodied')) {
-	        return '"Sinful Zinfandel"';
-	      } else {
-	        //selection is red, dry, and light
-	        return '"A Light Finish"';
-	      }
-	    }
-	  } else {
-	    // selection includes white
-	    if (customerSelection.includes('sweet')) {
-	      if (customerSelection.includes('full-bodied')) {
-	        return '"A Softer Shade of Sauternes"';
-	      } else {
-	        // selection is white, sweet, and light
-	        return '"Memories of Reisling"';
-	      }
-	    } else {
-	      // selection is white and dry
-	      if (customerSelection.includes('light')) {
-	        return '"Petite Pinot Gris"';
-	      } else {
-	        //selection is white, dry, and light
-	        return '"Bite Your Tongue" crisp, dry';
-	      }
-	    }
+	    this.preferences = preferences;
 	  }
-	};
+	
+	  _createClass(CustPreferences, [{
+	    key: 'addPreference',
+	    value: function addPreference(customerPref) {
+	      this.preferences.push(customerPref);
+	    }
+	  }]);
+	
+	  return CustPreferences;
+	}();
+	
+	var Barkeep = function () {
+	  function Barkeep(personName) {
+	    _classCallCheck(this, Barkeep);
+	
+	    this.name = personName;
+	  }
+	
+	  _createClass(Barkeep, [{
+	    key: 'newBlend',
+	    value: function newBlend(customerPreferences) {
+	      this.customerSelection = customerPreferences.preferences;
+	
+	      if (this.customerSelection.includes('red')) {
+	        if (this.customerSelection.includes('sweet')) {
+	          if (this.customerSelection.includes('full-bodied')) {
+	            return '"Six of One"';
+	          } else {
+	            // selection is red, sweet, and light
+	            return '"Sangria Anyone?"';
+	          }
+	        } else {
+	          // selection includes dry
+	          if (this.customerSelection.includes('full-bodied')) {
+	            return '"Sinful Zinfandel"';
+	          } else {
+	            //selection is red, dry, and light
+	            return '"A Light Finish"';
+	          }
+	        }
+	      } else {
+	        // selection includes white
+	        if (this.customerSelection.includes('sweet')) {
+	          if (this.customerSelection.includes('full-bodied')) {
+	            return '"A Softer Shade of Sauternes"';
+	          } else {
+	            // selection is white, sweet, and light
+	            return '"Memories of Reisling"';
+	          }
+	        } else {
+	          // selection is white and dry
+	          if (this.customerSelection.includes('light')) {
+	            return '"Petite Pinot Gris"';
+	          } else {
+	            //selection is white, dry, and light
+	            return '"Bite Your Tongue" crisp, dry';
+	          }
+	        }
+	      }
+	    }
+	  }]);
+	
+	  return Barkeep;
+	}();
 	
 	function serveWineBlend() {
 	
@@ -11600,9 +11632,6 @@
 	
 	        // new instance of this obj
 	        var barkeep = new Barkeep('Lynne');
-	
-	        // get new wine blend name and mix
-	        // wineName = barkeep.newBlend(BlendPreference);
 	
 	        // deliver new wine blend and display ciao button
 	        $('.deliver-blend').show();

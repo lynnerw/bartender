@@ -1,50 +1,43 @@
-var $ = require('../node_modules/jquery/src/jquery');
-var serveWine = require('./bartenderServe');
+"use strict";
 
-// user role to display correct UI
-var role = '';
+import $ from '../node_modules/jquery/src/jquery';
+import serveWineBlend from './bartenderServe';
 
-// adding to inventory and tagging it
-var Inventory = function() {
-  this.cellar = [];
-};
+class Inventory {
+  constructor() {
+    this.cellar = [];
+  }
 
-Inventory.prototype.stockWine = function(grapeName, grapeColor, grapeFlavor, grapeWeight) {
-  this.cellar.push({
-    type: grapeName,
-    color: grapeColor,
-    flavor: grapeFlavor,
-    weight: grapeWeight
-  });
-};
+  stockWine(grapeName, grapeColor, grapeFlavor, grapeWeight) {
+    this.cellar.push({
+      type: grapeName,
+      color: grapeColor,
+      flavor: grapeFlavor,
+      weight: grapeWeight
+    });
+  }
+}
 
 // generate random number to return one of the wines in the cellar
 function getRandomWine(currentInventory) {
   var bottlesStocked = currentInventory.cellar.length;
   var randomIndex = Math.floor(Math.random() * bottlesStocked);
+
   return currentInventory.cellar[randomIndex].type;
 }
 
 $(document).ready(function() {
 
-  // hide barkeep-specific UI elements
-  $('#barkeepRole').hide();
-  // hide customer-specific UI elements
-  $('#customerRole').hide();
-
-  // check user role
   $('#userRole').on('click', function(e) {
       e.preventDefault();
-      role = $('input[name=userRole]:checked').val();
+      var role = $('input[name=userRole]:checked').val();
       $('#userRole').hide();
 
-      if (role === 'stock') {
-
-        // role = barkeep; stock the wine cellar
-        var wineInventory = new Inventory();
+      if (role === 'stockWine') {
 
         $('#barkeepRole').show();
-        $('.shift-over').hide();
+
+        var wineInventory = new Inventory();
 
         $('input[type=submit]').click( function(e) {
           e.preventDefault();
@@ -65,7 +58,8 @@ $(document).ready(function() {
           $('input[type=submit]').click( function(e) {
             e.preventDefault();
 
-            // clear radio buttons and checkbox
+            // clear role, radio buttons, and checkbox
+            role = '';
             $('input[name=grapeColor]').prop('checked', false);
             $('input[name=grapeFlavor]').prop('checked', false);
             $('input[name=grapeWeight]').prop('checked', false);
@@ -78,7 +72,7 @@ $(document).ready(function() {
 
       } else {
 
-          serveWine();
+          serveWineBlend();
 
       }  // end role of customer
 
